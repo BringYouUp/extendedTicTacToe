@@ -1,0 +1,54 @@
+$b-width: .125rem
+*
+	margin: 0
+	box-sizing: border-box
+	font-weight: 800
+
+#root
+	width: 100vw
+	height: 100vh
+
+body
+	overflow: hidden
+
+#root
+	width: 100vw
+	height: 100vh
+
+
+.game
+	display: flex
+	width: inherit
+	height: inherit
+
+.GameBoard
+	flex-basis: 85%
+	background: grey
+	display: grid
+	grid-template: repeat(10, 50px) / repeat(10, 50px)
+	grid-gap: 2px
+	justify-content: center
+	align-content: center
+
+
+.GameMenu
+	flex-basis: 15%
+	background: skyblue
+	display: flex
+	flex-direction: column
+
+
+.Cell
+	// height: 50px
+	// width: 50px
+	background: white
+	color: black
+	cursor: pointer
+	// margin: 2px
+
+.GameOption
+	height: fit-content
+
+.History
+	height: auto
+
