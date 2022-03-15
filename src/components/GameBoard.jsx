@@ -3,7 +3,7 @@ import Cell from "./Cell"
 
 import './../styles/root.sass'
 
-const GameBoard = ({currentBoard, handlerOfCellClick}) => {
+const GameBoard = ({currentBoard, handlerOfCellClick, infoAboutWinner}) => {
 	return (
 		<div className="GameBoard">
 			{
@@ -12,6 +12,9 @@ const GameBoard = ({currentBoard, handlerOfCellClick}) => {
 						key={position}
 						value={anotherCellOfBoard}
 						handlerOfCellClick={() => {handlerOfCellClick(position)}}
+						
+						infoAboutWinner={infoAboutWinner}
+						position={position}
 					/>
 				})
 			}

@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 
 import './../styles/root.sass'
 
-const History = () => {
+const History = ({history, moveTo, moveToOut}) => {
+	const [isShowHistory, updateDisplayingHistory] = useState(false)
+
+	const showHistory = () => updateDisplayingHistory(prev => !prev)
 
 	return (
-		<div className="History">
-			
+		<div onMouseLeave={() => moveToOut()} className="History">
+			<button onClick={showHistory} type="button">Show History</button>
+			<ul>
+			{
+				isShowHistory &&
+				history.map((item, index) => (
+					<li 
+						key={index}
+						onMouseEnter={() => {moveTo(index)}}
+						
+					>	
+						Go to move #{index}
+					</li>
+				))
+			}
+			</ul>
 		</div>)
 }
 

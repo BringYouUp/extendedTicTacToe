@@ -11,44 +11,81 @@ $b-width: .125rem
 body
 	overflow: hidden
 
+ul
+	padding: 0
+	list-style-type: none
+
 #root
 	width: 100vw
 	height: 100vh
+	background-color: darkslateblue
 
 
 .game
+	padding: .5rem
 	display: flex
 	width: inherit
 	height: inherit
 
+.GameMessage
+	padding-bottom: .5rem
+	border-bottom: 1px solid slategrey
+	text-align: center
+
+.GameOption
+	border-bottom: 1px solid slategrey
+	padding: .5rem 0	
+	& li
+		margin: 2.5px 0
+		&:hover
+			background-color: red
+
+.History
+	height: auto
+	border-bottom: 1px solid slategrey
+	overflow-y: auto
+	& button
+		padding: .5rem 0
+		border: 0
+		background-color: transparent
+
 .GameBoard
-	flex-basis: 85%
-	background: grey
+	flex-basis: 80%
 	display: grid
-	grid-template: repeat(10, 50px) / repeat(10, 50px)
-	grid-gap: 2px
+	grid-template: repeat(15, 40px) / repeat(15, 40px)
 	justify-content: center
 	align-content: center
-
+	& > div
+		border-right: 1px solid slategrey
+		border-bottom: 1px solid slategrey
+	& > div:nth-child(15n)
+		border-right: 0px solid transparent
+	& > div:nth-child(n+211)
+		border-bottom: 0px solid transparent
 
 .GameMenu
-	flex-basis: 15%
-	background: skyblue
+	border-left: 1px solid slategrey
+	flex-basis: 20%
 	display: flex
 	flex-direction: column
-
+	padding-left: .5rem
 
 .Cell
-	// height: 50px
-	// width: 50px
-	background: white
+	// background: yellow
 	color: black
 	cursor: pointer
-	// margin: 2px
+	background-position: center
+	background-repeat: no-repeat
+	background-size: contain
+	padding: 5px
+	&.tic
+		background-image: url('./../img/tic.png')
+	&.tac
+		background-image: url('./../img/tac.png')
+	&.winner
+		background-color: red
 
 .GameOption
 	height: fit-content
 
-.History
-	height: auto
 
