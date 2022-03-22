@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import './../styles/root.sass'
 
-const History = ({history, moveTo, moveToOut}) => {
+const History = ({history, moveTo, moveToOut, currentBoard}) => {
 	const [isShowHistory, updateDisplayingHistory] = useState(false)
 
 	const showHistory = () => updateDisplayingHistory(prev => !prev)

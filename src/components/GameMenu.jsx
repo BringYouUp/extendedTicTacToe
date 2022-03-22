@@ -23,6 +23,7 @@ const GameMenu = ({currentBoard, currentPlayer, gameModeHandler, isGameWithBot, 
 
 			<History 
 				history={history}
+				currentBoard={currentBoard}
 				moveTo={moveTo}
 				moveToOut={moveToOut}
 
