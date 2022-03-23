@@ -3,7 +3,7 @@ import Cell from "./Cell"
 
 import './../styles/root.sass'
 
-const GameBoard = ({currentBoard, updateHistory, winner, winStreak}) => {
+const GameBoard = ({currentBoard, moveHandler, winner, winStreak}) => {
 	return (
 		<div className="GameBoard">
 			{
@@ -11,7 +11,7 @@ const GameBoard = ({currentBoard, updateHistory, winner, winStreak}) => {
 					return <Cell
 						key={position}
 						value={anotherCellOfBoard}
-						updateHistory={() => updateHistory(position)}
+						moveHandler={() => moveHandler(position)}
 						
 						winner={winner}
 						position={position}

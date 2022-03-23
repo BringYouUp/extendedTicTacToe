@@ -2,7 +2,7 @@ import React from "react";
 
 import './../styles/root.sass'
 
-const Cell = ({value, updateHistory, winner, winStreak, position}) => {
+const Cell = ({value, moveHandler, winner, winStreak, position}) => {
 
 	const finalStylesForCell = stylesArray =>stylesArray.join(' ')
 
@@ -24,7 +24,7 @@ const Cell = ({value, updateHistory, winner, winStreak, position}) => {
 	}
 
 	return (
-		<div onClick={updateHistory} className={setClassNameForCell()} />)
+		<div onClick={moveHandler} className={setClassNameForCell()} />)
 }
 
 export default Cell

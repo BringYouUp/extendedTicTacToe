@@ -8,7 +8,7 @@ const GameOption = ({startNewGame, isGameWithBot, gameModeHandler}) => {
 		<div className="GameOption">
 			<ul>
 				<li onClick={() => {startNewGame()}}>New Game</li>
-				<li onClick={() => {gameModeHandler()}}>{isGameWithBot ? 'Game with BOT' : 'Change Game MODE'}</li>
+				<li onClick={() => {gameModeHandler()}}>{isGameWithBot ? 'With a BOT' : 'Not with a BOT'}</li>
 				
 			</ul>
 		</div>)

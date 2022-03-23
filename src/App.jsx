@@ -1,25 +1,44 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import useHistory from './hooks/useHistory'
+import useCurrentBoard from './hooks/useCurrentBoard'
 import useWinner from './hooks/useWinner'
 import useBot from './hooks/useBot'
 
 import GameBoard from './components/GameBoard'
 import GameMenu from './components/GameMenu'
 
+import {START_GAME} from './consts'
+
 import './styles/root.sass'
 
 const App = () => {
-	const {history, currentBoard, updateHistory} = useHistory('EXTENDED_TIC_TAC_TOE')
-	const {winner, winnerStreak} = useWinner(currentBoard)
+	const { history, updateHistory } = useHistory('EXTENDED_TIC_TAC_TOE')
+	const { currentBoard, updateCurrentBoard } = useCurrentBoard(history)
+	const { winner, winnerStreak } = useWinner(currentBoard)
 
 	const [isGameWithBot, changeGameMode] = useState(false)
+	const { moveOfBot } = useBot(isGameWithBot, history)
 
-	const [botMove, setBotMove] = useBot(currentBoard)
-	
-	const startNewGame = () => {
+	useEffect(() => {
+		moveHandler(moveOfBot)
+	}, [moveOfBot])
 
+	const moveHandler = anotherMove => {
+		if (currentBoard.board[anotherMove] || winner) return
+
+		let newIsXNext = !history.at(-1).isXNext
+		let newBoard = history.at(-1).board.map((item, index) => index === anotherMove ? history.at(-1).isXNext ? 'X' : 'O' : item)
+		let newHistory = [...history.slice(), {board: newBoard, isXNext: newIsXNext}]
+
+		updateHistory(newHistory)
 	}
+
+	const startNewGame = () => updateHistory(START_GAME)
+
+	const moveTo = position => updateCurrentBoard(position)
+
+	const moveToOut = position => updateCurrentBoard(history.length - 1)
 
 	const gameModeHandler = () => {
 		changeGameMode(prev => !prev)
@@ -30,7 +49,7 @@ const App = () => {
 		<div className="game">
 			<GameBoard
 				currentBoard={currentBoard.board}
-				updateHistory={updateHistory}
+				moveHandler={moveHandler}
 				winner={winner}
 				winnerStreak={winnerStreak}
 			/>
@@ -41,8 +60,8 @@ const App = () => {
 				winner={winner}
 				startNewGame={startNewGame}
 				history={history}
-				// moveTo={moveTo}
-				// moveToOut={moveToOut}
+				moveTo={moveTo}
+				moveToOut={moveToOut}
 				isGameWithBot={isGameWithBot}
 				gameModeHandler={gameModeHandler}
 			/>
