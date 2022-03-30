@@ -14,7 +14,10 @@ const GameMessage = ({currentBoard, currentPlayer, winner}) => {
 			{!winner && isMovesLeft && `${currentPlayer} move`}
 
 			{!isMovesLeft && 'DRAW'}
-		</div>)
+		</div>
+	)
 }
 
-export default GameMessage
+const areEqual = (prevProps, nextProps) => prevProps.currentBoard === nextProps.currentBoard
+
+export default React.memo(GameMessage, areEqual)

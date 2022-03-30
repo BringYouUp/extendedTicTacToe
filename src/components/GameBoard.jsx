@@ -3,7 +3,8 @@ import Cell from "./Cell"
 
 import './../styles/root.sass'
 
-const GameBoard = ({currentBoard, moveHandler, winner, winStreak}) => {
+const GameBoard =({currentBoard, moveHandler, winner, winStreak}) => {
+
 	return (
 		<div className="GameBoard">
 			{
@@ -18,7 +19,10 @@ const GameBoard = ({currentBoard, moveHandler, winner, winStreak}) => {
 					/>
 				})
 			}
-		</div>)
+		</div>
+	)
 }
 
-export default GameBoard
+const areEqual = (prevProps, nextProps) => prevProps.currentBoard === nextProps.currentBoard
+
+export default React.memo(GameBoard, areEqual)

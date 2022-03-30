@@ -11,20 +11,22 @@ const History = ({history, moveTo, moveToOut, currentBoard}) => {
 		<div onMouseLeave={() => moveToOut()} className="History">
 			<button onClick={showHistory} type="button">Show History</button>
 			<ul>
-			{
-				isShowHistory &&
-				history.map((item, index) => (
-					<li 
-						key={index}
-						onMouseEnter={() => {moveTo(index)}}
-						
-					>	
-						Go to move #{index}
-					</li>
-				))
-			}
+				{
+					isShowHistory &&
+					history.map((item, index) => (
+						<li 
+							key={index}
+							onMouseEnter={() => {moveTo(index)}}
+						>	
+							Go to move #{index}
+						</li>
+					))
+				}
 			</ul>
-		</div>)
+		</div>
+	)
 }
 
-export default History
+const areEqual = (prevProps, nextProps) => prevProps.history === nextProps.history
+
+export default React.memo(History, areEqual)

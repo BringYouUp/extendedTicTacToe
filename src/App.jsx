@@ -15,35 +15,38 @@ import './styles/root.sass'
 const App = () => {
 	const { history, updateHistory } = useHistory('EXTENDED_TIC_TAC_TOE')
 	const { currentBoard, updateCurrentBoard } = useCurrentBoard(history)
-	const { winner, winnerStreak } = useWinner(currentBoard)
+	const { winner, winnerStreak } = useWinner(history)
 
-	const [isGameWithBot, changeGameMode] = useState(false)
+	const [ isGameWithBot, setGameMode ] = useState(true)
 	const { moveOfBot } = useBot(isGameWithBot, history)
 
-	useEffect(() => {
-		moveHandler(moveOfBot)
-	}, [moveOfBot])
+	useEffect(() => moveHandler(moveOfBot), [moveOfBot])
 
 	const moveHandler = anotherMove => {
 		if (currentBoard.board[anotherMove] || winner) return
 
 		let newIsXNext = !history.at(-1).isXNext
 		let newBoard = history.at(-1).board.map((item, index) => index === anotherMove ? history.at(-1).isXNext ? 'X' : 'O' : item)
-		let newHistory = [...history.slice(), {board: newBoard, isXNext: newIsXNext}]
 
-		updateHistory(newHistory)
+		updateHistory(prev => [...prev, {board: newBoard, isXNext: newIsXNext}])
 	}
 
-	const startNewGame = () => updateHistory(START_GAME)
-
+	const startNewGame = () => {
+		updateHistory(START_GAME)
+	}
+	
 	const moveTo = position => updateCurrentBoard(position)
 
 	const moveToOut = position => updateCurrentBoard(history.length - 1)
 
 	const gameModeHandler = () => {
-		changeGameMode(prev => !prev)
-		startNewGame()
+		updateHistory(START_GAME)
+		setGameMode(prev => !prev)
 	}
+
+	useEffect(() => {
+		// console.log('App rendered')
+	})
 
 	return (
 		<div className="game">

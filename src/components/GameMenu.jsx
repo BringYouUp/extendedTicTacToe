@@ -7,6 +7,7 @@ import GameOption from './GameOption'
 import History from './History'
 
 const GameMenu = ({currentBoard, currentPlayer, gameModeHandler, isGameWithBot, startNewGame, winner, history, moveTo, moveToOut}) => {
+
 	return (
 		<div className="GameMenu">
 			<GameMessage
@@ -26,11 +27,13 @@ const GameMenu = ({currentBoard, currentPlayer, gameModeHandler, isGameWithBot, 
 				currentBoard={currentBoard}
 				moveTo={moveTo}
 				moveToOut={moveToOut}
-
-
-
 			/>
-		</div>)
+		</div>
+	)
 }
 
-export default GameMenu
+const areEqual = 	(prevProps, nextProps) => 
+	prevProps.currentBoard === nextProps.currentBoard &&
+	prevProps.isGameWithBot == nextProps.isGameWithBot
+
+export default React.memo(GameMenu, areEqual)

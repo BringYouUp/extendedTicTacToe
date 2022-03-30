@@ -5,11 +5,17 @@ import useLocalStorage from './useLocalStorage'
 import {START_GAME} from './../consts'
 
 export default function useHistory (currentHistory) {
-	const [currentBoard, setCurrentBoard] = useState(currentHistory[currentHistory.length - 1])
+	const [currentBoard, setCurrentBoard] = useState(currentHistory.at(-1))
+
+	// debugger
 
 	const updateCurrentBoard = position => setCurrentBoard(currentHistory[position])
 
-	useEffect(() => setCurrentBoard(currentHistory.at(-1)), [currentHistory])
+	useEffect(() => {
+		setCurrentBoard(currentHistory.at(-1))
+
+		
+	}, [currentHistory.length])
 
 	return {currentBoard, updateCurrentBoard}
 }

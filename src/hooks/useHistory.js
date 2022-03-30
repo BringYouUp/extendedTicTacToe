@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import useLocalStorage from './useLocalStorage'
 
@@ -8,11 +8,10 @@ export default function useHistory (key) {
 	const [storedData, setDataIntoLocalStorage] = useLocalStorage(key, START_GAME)
 	const [history, setHistory] = useState(storedData)
 
-	const updateHistory = actualHistory => setHistory(actualHistory)
-
-	useEffect(() => {
+	const updateHistory = actualHistory => {
 		setDataIntoLocalStorage('EXTENDED_TIC_TAC_TOE', history)
-	}, [history])
+		setHistory(actualHistory)
+	}
 
 	return {history, updateHistory}
 }

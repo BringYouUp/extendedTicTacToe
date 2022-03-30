@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 
 import {SIZE_OF_BOARD} from './../consts'
+import {isValidToRight, isValidToDown, isValidToDiagonal} from './../helpers/isValid'
 
 export default function useWinner (currentBoard) {
 	const [winner, setWinner] = useState(null)
 	const [winStreak, setWinStreak] = useState([])
 
 	useEffect(() => {
-		const prevPlayer = currentBoard.isXNext ? 'O' : 'X'  
+		const prevPlayer = currentBoard.at(-1).isXNext ? 'O' : 'X'  
 
-		const movesOfPrevPlayer = currentBoard.board.reduce((acc, valueOfCell, indexOfCell) =>  valueOfCell === prevPlayer ? [...acc, indexOfCell] : acc, [])
+		const movesOfPrevPlayer = currentBoard.at(-1).board.reduce((acc, valueOfCell, indexOfCell) =>  valueOfCell === prevPlayer ? [...acc, indexOfCell] : acc, [])
 
 		if (movesOfPrevPlayer.length < 5) {
 			setWinner(null)
@@ -28,7 +29,7 @@ export default function useWinner (currentBoard) {
 				setWinStreak([])
 			}
 		}		
-	}, [currentBoard])
+	}, [currentBoard.at(-1).board])
 
 	return { winner, winStreak }
 }
@@ -40,16 +41,3 @@ const isWinnerWithNextParams = (movesOfPrevPlayer, startPoint, step) => {
 
 	return true
 }
-
-const isValidToRight = (startPoint, SIZE_OF_BOARD) => ![0, 1, 2, 3].includes((startPoint + 4) % SIZE_OF_BOARD)
-
-const isValidToDown = (startPoint, SIZE_OF_BOARD) => startPoint + 4 * SIZE_OF_BOARD < SIZE_OF_BOARD ** 2
-
-const isValidToDiagonal = (startPoint, SIZE_OF_BOARD, diagonal) => {
-	const arr = new Array(SIZE_OF_BOARD).fill(null).map((item, index) => index)
-	const finalValue = startPoint + 4 * (SIZE_OF_BOARD + diagonal)
-	const forbiddenCells = diagonal > 0 ? arr.slice(0, 4) : arr.slice(-4)
-
-	if (!forbiddenCells.includes(finalValue % SIZE_OF_BOARD) && finalValue < SIZE_OF_BOARD ** 2) return true
-}
-
