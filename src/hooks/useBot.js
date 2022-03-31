@@ -28,15 +28,12 @@ const isAwailableCell = (currentBoard, anotherBotMove) => currentBoard.board[ano
 
 const getAnotherMoveForBot = currentBoard => {
 	const enemyPlayer = currentBoard.isXNext ? 'O' : 'X'
-	// const movesOfEnemyPlayer = currentBoard.board.filter(anotherMove => anotherMove === enemyPlayer)
-	// const movesOfBot = currentBoard.board.filter(anotherMove => anotherMove !== null && anotherMove !== enemyPlayer)
 
 	let anotherBotMove = getGeneratedCell()
 
-	let arrayOfWights = getWieghtForEmptyCell(currentBoard, enemyPlayer)
-	// console.log(arrayOfWights)
-	prettyOutputOfData(arrayOfWights)
+	let arrayOfWeight = getWeightForEmptyCell(currentBoard, enemyPlayer)
 
+	console.log(isThereIsDanger(arrayOfWeight))
 
 	while (!isAwailableCell(currentBoard, anotherBotMove))
 		anotherBotMove = getGeneratedCell()
@@ -44,39 +41,51 @@ const getAnotherMoveForBot = currentBoard => {
 	return anotherBotMove
 }
 
-function getWieghtForEmptyCell(currentBoard, enemyPlayer) {
+function isThereIsDanger(arrayOfWeight) {
+	let maxWeight = 0
+
+	for (let anotherArrayOfWeight of arrayOfWeight) {
+		maxWeight = maxWeight < anotherArrayOfWeight.horizontalWeight ? anotherArrayOfWeight.horizontalWeight : maxWeight 
+		maxWeight = maxWeight < anotherArrayOfWeight.verticalWeight ? anotherArrayOfWeight.verticalWeight : maxWeight 
+		maxWeight = maxWeight < anotherArrayOfWeight.mainDiagonalWeight ? anotherArrayOfWeight.mainDiagonalWeight : maxWeight 
+		maxWeight = maxWeight < anotherArrayOfWeight.secondaryDiagonalWeight ? anotherArrayOfWeight.secondaryDiagonalWeight : maxWeight 
+	}
+
+	return maxWeight >= 3
+}
+
+function getWeightForEmptyCell(currentBoard, enemyPlayer) {
 	let cache = currentBoard.board.map((item, index) => {
 		
-		if (item !== null) return 0
+		if (item !== null) return {}
 
-		let horizontal = toLeftRight(item, index)
-		let vertical = toUp(item, index) + toDown(item, index)
+		let horizontalWeight = toLeft(item, index) + toRight(item, index)
+		let verticalWeight = toUp(item, index) + toDown(item, index)
+		let mainDiagonalWeight = toUpLeft(item, index) + toDownRight(item, index)
+		let secondaryDiagonalWeight = toUpRight(item, index) + toDownLeft(item, index)
 
-		return horizontal + vertical
-
+		return { horizontalWeight, verticalWeight, mainDiagonalWeight, secondaryDiagonalWeight }
 	})
 
-
-
-	function toLeftRight(item, index) {
+	function toLeft(item, index) {
 		for (let i = 1; i < 5; i++) {
-			if ((index + i) % SIZE_OF_BOARD === SIZE_OF_BOARD - 1) return i - 1
+			if ((index - i) % SIZE_OF_BOARD === SIZE_OF_BOARD - 1) return i - 1
 			if (currentBoard.board[index - i] !== enemyPlayer) return i - 1
 		}
 		return 4
 	}
 
-	// function to(item, index) {
-	// 	for (let i = 1; i < 5; i++) {
-	// 		if ((index + i) % SIZE_OF_BOARD === 0) return i - 1
-	// 		if (currentBoard.board[index + i] !== enemyPlayer) return i - 1
-	// 	}
-	// 	return 4
-	// }
+	function toRight(item, index) {
+		for (let i = 1; i < 5; i++) {
+			if ((index + i) % SIZE_OF_BOARD === 0) return i - 1
+			if (currentBoard.board[index + i] !== enemyPlayer) return i - 1
+		}
+		return 4
+	}
 
 	function toUp (item, index) {
 		for (let i = 1; i < 5; i++) {
-			if (i * SIZE_OF_BOARD - index < 0) return i - 1
+			if (index - i * SIZE_OF_BOARD < 0) return i - 1
 			if (currentBoard.board[index - i * SIZE_OF_BOARD] !== enemyPlayer) return i - 1
 		}
 		return 4
@@ -84,8 +93,44 @@ function getWieghtForEmptyCell(currentBoard, enemyPlayer) {
 
 	function toDown (item, index) {
 		for (let i = 1; i < 5; i++) {
-			if (i * SIZE_OF_BOARD - index > SIZE_OF_BOARD ** 2) return i - 1
+			if (index + i * SIZE_OF_BOARD > SIZE_OF_BOARD ** 2) return i - 1
 			if (currentBoard.board[index + i * SIZE_OF_BOARD] !== enemyPlayer) return i - 1
+		}
+		return 4
+	}
+
+	function toUpLeft(item, index) {
+		for (let i = 1; i < 5; i++) {
+			if (index - i * SIZE_OF_BOARD - i < 0) return i - 1
+			if ((index - i) % SIZE_OF_BOARD === SIZE_OF_BOARD - 1) return i - 1
+			if (currentBoard.board[index - i * SIZE_OF_BOARD - i] !== enemyPlayer) return i - 1
+		}
+		return 4
+	}
+
+	function toDownRight(item, index) {
+		for (let i = 1; i < 5; i++) {
+			if (index + i * SIZE_OF_BOARD + i > SIZE_OF_BOARD ** 2) return i - 1
+			if ((index + i) % SIZE_OF_BOARD === 0) return i - 1
+			if (currentBoard.board[index + i * SIZE_OF_BOARD + i] !== enemyPlayer) return i - 1
+		}
+		return 4
+	}
+
+	function toUpRight(item, index) {
+		for (let i = 1; i < 5; i++) {
+			if (index - i * SIZE_OF_BOARD + i < 0) return i - 1
+			if ((index + i) % SIZE_OF_BOARD === 0) return i - 1
+			if (currentBoard.board[index - i * SIZE_OF_BOARD + i] !== enemyPlayer) return i - 1
+		}
+		return 4
+	}
+
+	function toDownLeft(item, index) {
+		for (let i = 1; i < 5; i++) {
+			if (index + i * SIZE_OF_BOARD - i > SIZE_OF_BOARD ** 2) return i - 1
+			if ((index - i) % SIZE_OF_BOARD === SIZE_OF_BOARD - 1) return i - 1
+			if (currentBoard.board[index + i * SIZE_OF_BOARD - i] !== enemyPlayer) return i - 1
 		}
 		return 4
 	}
@@ -95,12 +140,16 @@ function getWieghtForEmptyCell(currentBoard, enemyPlayer) {
 
 function prettyOutputOfData(data) {
 	console.group()
-	for(let i = 0; i < 15; i++) console.log(data.slice(15 * i, 15 * (i + 1)))
+	console.log(data)
 	console.groupEnd()
+
+
 }
 
 
 
+
+// to optimize useBOT !!!!
 
 
 
