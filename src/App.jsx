@@ -4,49 +4,42 @@ import useHistory from './hooks/useHistory'
 import useCurrentBoard from './hooks/useCurrentBoard'
 import useWinner from './hooks/useWinner'
 import useBot from './hooks/useBot'
+import useLocalStorage from './hooks/useLocalStorage'
 
 import GameBoard from './components/GameBoard'
 import GameMenu from './components/GameMenu'
 
-import {START_GAME} from './consts'
+import {START_BOARD, START_GAME, LS_BOARD, LS_IS_GAME_WITH_BOT} from './consts'
 
 import './styles/root.sass'
 
 const App = () => {
-	const { history, updateHistory } = useHistory('EXTENDED_TIC_TAC_TOE')
+	const { history, updateHistory } = useHistory(LS_BOARD)
 	const { currentBoard, updateCurrentBoard } = useCurrentBoard(history)
 	const { winner, winnerStreak } = useWinner(history)
-
-	const [ isGameWithBot, setGameMode ] = useState(true)
-	const { moveOfBot } = useBot(isGameWithBot, history)
-
-	useEffect(() => moveHandler(moveOfBot), [moveOfBot])
+	const { moveOfBot, isGameWithBot, setGameMode } = useBot(history)
 
 	const moveHandler = anotherMove => {
 		if (currentBoard.board[anotherMove] || winner) return
 
-		let newIsXNext = !history.at(-1).isXNext
-		let newBoard = history.at(-1).board.map((item, index) => index === anotherMove ? history.at(-1).isXNext ? 'X' : 'O' : item)
+		let newIsXNext = !currentBoard.isXNext
+		let newBoard = currentBoard.board.map((item, index) => index === anotherMove ? currentBoard.isXNext ? 'X' : 'O' : item)
 
 		updateHistory(prev => [...prev, {board: newBoard, isXNext: newIsXNext}])
 	}
 
-	const startNewGame = () => {
-		updateHistory(START_GAME)
-	}
-	
+	const startNewGame = () => updateHistory([{board: START_BOARD, isXNext: true}])
+
 	const moveTo = position => updateCurrentBoard(position)
 
 	const moveToOut = position => updateCurrentBoard(history.length - 1)
 
 	const gameModeHandler = () => {
 		updateHistory(START_GAME)
-		setGameMode(prev => !prev)
+		setGameMode()
 	}
 
-	useEffect(() => {
-		// console.log('App rendered')
-	})
+	useEffect(() => moveHandler(moveOfBot), [moveOfBot])
 
 	return (
 		<div className="game">

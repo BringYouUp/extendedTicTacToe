@@ -3,14 +3,14 @@ import React, { useState, useEffect } from "react";
 import {SIZE_OF_BOARD} from './../consts'
 import {isValidToRight, isValidToDown, isValidToDiagonal} from './../helpers/isValid'
 
-export default function useWinner (currentBoard) {
+export default function useWinner (actualHistory) {
 	const [winner, setWinner] = useState(null)
 	const [winStreak, setWinStreak] = useState([])
 
 	useEffect(() => {
-		const prevPlayer = currentBoard.at(-1).isXNext ? 'O' : 'X'  
+		const prevPlayer = actualHistory.at(-1).isXNext ? 'O' : 'X'  
 
-		const movesOfPrevPlayer = currentBoard.at(-1).board.reduce((acc, valueOfCell, indexOfCell) =>  valueOfCell === prevPlayer ? [...acc, indexOfCell] : acc, [])
+		const movesOfPrevPlayer = actualHistory.at(-1).board.reduce((acc, valueOfCell, indexOfCell) =>  valueOfCell === prevPlayer ? [...acc, indexOfCell] : acc, [])
 
 		if (movesOfPrevPlayer.length < 5) {
 			setWinner(null)
@@ -29,7 +29,7 @@ export default function useWinner (currentBoard) {
 				setWinStreak([])
 			}
 		}		
-	}, [currentBoard.at(-1).board])
+	}, [actualHistory.at(-1).board])
 
 	return { winner, winStreak }
 }

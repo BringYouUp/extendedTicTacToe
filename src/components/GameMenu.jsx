@@ -36,4 +36,4 @@ const areEqual = 	(prevProps, nextProps) =>
 	prevProps.currentBoard === nextProps.currentBoard &&
 	prevProps.isGameWithBot == nextProps.isGameWithBot
 
-export default React.memo(GameMenu, areEqual)
+export default React.memo(GameMenu)

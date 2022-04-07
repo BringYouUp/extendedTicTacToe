@@ -1,17 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import useLocalStorage from './useLocalStorage'
 
-import {START_GAME} from './../consts'
+import {START_GAME, LS_BOARD} from './../consts'
 
 export default function useHistory (key) {
-	const [storedData, setDataIntoLocalStorage] = useLocalStorage(key, START_GAME)
-	const [history, setHistory] = useState(storedData)
+	const [storedDataAboutHistory, setDataAboutHistory] = useLocalStorage(key, START_GAME)
+	const [history, setHistory] = useState(storedDataAboutHistory)
 
-	const updateHistory = actualHistory => {
-		setDataIntoLocalStorage('EXTENDED_TIC_TAC_TOE', history)
-		setHistory(actualHistory)
-	}
+	const updateHistory = actualHistory => setHistory(actualHistory)
+	useEffect(() => setDataAboutHistory(LS_BOARD, history), [history])
 
 	return {history, updateHistory}
 }
