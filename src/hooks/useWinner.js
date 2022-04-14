@@ -5,7 +5,7 @@ import {isValidToRight, isValidToDown, isValidToDiagonal} from './../helpers/isV
 
 export default function useWinner (actualHistory) {
 	const [winner, setWinner] = useState(null)
-	const [winStreak, setWinStreak] = useState([])
+	const [winnerStreak, setWinnerStreak] = useState([])
 
 	useEffect(() => {
 		const prevPlayer = actualHistory.at(-1).isXNext ? 'O' : 'X'  
@@ -14,30 +14,34 @@ export default function useWinner (actualHistory) {
 
 		if (movesOfPrevPlayer.length < 5) {
 			setWinner(null)
-			setWinStreak([])
+			setWinnerStreak([])
 		}
 
 		for (let move of movesOfPrevPlayer) {
 			let isWinnerThere =
-				isValidToRight(move, SIZE_OF_BOARD) && isWinnerWithNextParams(movesOfPrevPlayer, move, 1) ||
-				isValidToDown(move, SIZE_OF_BOARD) && isWinnerWithNextParams(movesOfPrevPlayer, move, SIZE_OF_BOARD) ||
-				isValidToDiagonal(move, SIZE_OF_BOARD, 1) && isWinnerWithNextParams(movesOfPrevPlayer, move, SIZE_OF_BOARD + 1) ||
-				isValidToDiagonal(move, SIZE_OF_BOARD, -1) && isWinnerWithNextParams(movesOfPrevPlayer, move, SIZE_OF_BOARD - 1)
+				isValidToRight(move, SIZE_OF_BOARD) && winnerStreakWithNextParams(movesOfPrevPlayer, move, 1) ||
+				isValidToDown(move, SIZE_OF_BOARD) && winnerStreakWithNextParams(movesOfPrevPlayer, move, SIZE_OF_BOARD) ||
+				isValidToDiagonal(move, SIZE_OF_BOARD, 1) && winnerStreakWithNextParams(movesOfPrevPlayer, move, SIZE_OF_BOARD + 1) ||
+				isValidToDiagonal(move, SIZE_OF_BOARD, -1) && winnerStreakWithNextParams(movesOfPrevPlayer, move, SIZE_OF_BOARD - 1)
 				
 			if (isWinnerThere) {
 				setWinner(prevPlayer)
-				setWinStreak([])
+				setWinnerStreak([...isWinnerThere])
+				return
 			}
 		}		
 	}, [actualHistory.at(-1).board])
 
-	return { winner, winStreak }
+	return { winner, winnerStreak }
 }
 
-const isWinnerWithNextParams = (movesOfPrevPlayer, startPoint, step) => {
-	for (let i = 1; i < 5; i++)
-		if (!movesOfPrevPlayer.includes(startPoint + step * i)) 
-			return false
+const winnerStreakWithNextParams = (movesOfPrevPlayer, startPoint, step) => {
+	let winnerStreak = [startPoint]
 
-	return true
+	for (let i = 1; i < 5; i++) {
+		if (!movesOfPrevPlayer.includes(startPoint + step * i)) return false
+		winnerStreak.push(startPoint + step * i)
+	}
+
+	return winnerStreak
 }

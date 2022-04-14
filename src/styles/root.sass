@@ -10,17 +10,25 @@ $b-width: .125rem
 	background-color: darkslateblue
 
 body
-	overflow: hidden
+	// overflow: hidden
 
 ul
 	padding: 0
 	list-style-type: none
 
 .game
+	position: relative
 	padding: .5rem
 	display: flex
+	flex-direction: column
 	width: inherit
 	height: inherit
+
+.Header
+	display: flex
+	justify-content: flex-end
+
+
 
 .GameMessage
 	padding-bottom: .5rem
@@ -45,7 +53,8 @@ ul
 		background-color: transparent
 
 .GameBoard
-	flex-basis: 80%
+	// flex-basis: 80%
+	width: 100%
 	display: grid
 	grid-template: repeat(15, 40px) / repeat(15, 40px)
 	justify-content: center
@@ -59,11 +68,24 @@ ul
 		border-bottom: 0px solid transparent
 
 .GameMenu
+
+	top: 0
+	right: 0
+	position: absolute
 	border-left: 1px solid slategrey
-	flex-basis: 20%
-	display: flex
-	flex-direction: column
-	padding-left: .5rem
+	// flex-basis: 20%
+	// display: flex
+	// flex-direction: column
+	// padding-left: .5rem
+	width: 20vw
+	height: 100vh
+	background: red
+	padding: 0.5rem
+
+.zzz
+	position: absolute
+	right: .5rem
+	top: .5rem
 
 .Cell
 	// background: yellow
@@ -83,4 +105,5 @@ ul
 .GameOption
 	height: fit-content
 
-
+.winner
+	background-color: red

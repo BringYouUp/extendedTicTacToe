@@ -3,77 +3,107 @@ import React, { useState, useEffect, useMemo } from "react";
 import useCurrentBoard from './useCurrentBoard'
 import useLocalStorage from './useLocalStorage'
 
-import {SIZE_OF_BOARD, LS_IS_GAME_WITH_BOT, LS_IS_BOT_MOVE_NEXT} from './../consts'
+import {SIZE_OF_BOARD, LS_IS_GAME_WITH_BOT, LS_IS_BOT_MOVES_NEXT} from './../consts'
 
 const useBot = currentHistory => {
-	const [ storedDataAboutIsGameWithBot, setDataAboutIsGameWithBot ] = useLocalStorage(LS_IS_GAME_WITH_BOT, false)
+	let [ storedDataAboutIsGameWithBot, setDataAboutIsGameWithBot ] = useLocalStorage(LS_IS_GAME_WITH_BOT, false)
 	const [ isGameWithBot, updateActivityOfBot ] = useState(storedDataAboutIsGameWithBot)
 
-	const [ storedData, setNextPlayerIntoLocalStorage ] = useLocalStorage(LS_IS_BOT_MOVE_NEXT, false)
-	const [ isBotMoveNext, setIsBotMoveNext ] = useState(storedData) 
+	const [ storedData, setNextPlayerIntoLocalStorage ] = useLocalStorage(LS_IS_BOT_MOVES_NEXT, false)
+	const [ isBotMoveNext, setIsBotMoveNext ] = useState(storedData)
+	// const [ isBotMoveFirst, setIsBotMoveFirst ] = useState(false)
 
 	const [ moveOfBot, setMoveOfBot ] = useState(NaN)
 	const { currentBoard } = useCurrentBoard(currentHistory)
 
-	const setGameMode = isBotMovesFirst => {
-		updateActivityOfBot(prev => !prev)
-		// setIsBotMoveNext(isBotMovesFirst)
+	const setGameMode = () => updateActivityOfBot(prev => !prev)
 
+	 // 
+
+	// const toUpdate
+
+
+	const startNewGameWithBot = isBotMoveFirst => {
+		setIsBotMoveNext(isBotMoveFirst)
 	}
 
 	useEffect (() => {
+		// console.log('isBotMoveNext', isBotMoveNext)
+
 		setIsBotMoveNext(prev => !prev)
-		setNextPlayerIntoLocalStorage(LS_IS_BOT_MOVE_NEXT, isBotMoveNext)
-		if (!isGameWithBot) return
+		setNextPlayerIntoLocalStorage(isBotMoveNext)
+		if (!isGameWithBot || !isBotMoveNext) return
 
-
-		if (!isBotMoveNext) return
-
-		let anotherBotMove = getAnotherMoveForBot(currentBoard)
+		let anotherBotMove = getNextMoveOfBot(currentBoard)
 
 		setMoveOfBot(anotherBotMove)
 	}, [currentBoard.board])
 
-	useEffect (() => setDataAboutIsGameWithBot(LS_IS_GAME_WITH_BOT, isGameWithBot), [isGameWithBot])
 
-	return { moveOfBot, isGameWithBot, setGameMode }
+	useEffect (() => {
+		if (!isGameWithBot || !isBotMoveNext) return
+
+
+		setNextPlayerIntoLocalStorage(isBotMoveNext)
+		if (!isGameWithBot || !isBotMoveNext) return
+
+		let anotherBotMove = getNextMoveOfBot(currentBoard)
+
+		setMoveOfBot(anotherBotMove)
+		setIsBotMoveNext(false)
+
+	}, [isBotMoveNext])
+
+	useEffect (() => setDataAboutIsGameWithBot(isGameWithBot), [isGameWithBot])
+
+	return { moveOfBot, isGameWithBot, setGameMode, startNewGameWithBot }
 }
 
-function getGeneratedCell() { return Math.trunc(Math.random() * Math.pow(SIZE_OF_BOARD, 2)) }
-
-function isAwailableCell(currentBoard, anotherBotMove) { return currentBoard.board[anotherBotMove] === null }
-
-function getAnotherMoveForBot(currentBoard) {
+function getNextMoveOfBot(currentBoard) {
 	const enemyPlayer = currentBoard.isXNext ? 'O' : 'X'
 	const botPlayer = enemyPlayer === 'X' ? 'O' : 'X'
 
-	let arrayOfWeighEnemyPlayer = getWeightForEveryEmptyCell(currentBoard, enemyPlayer, botPlayer)
+	let arrayOfWeighEnemyPlayerMoves = getWeightForEveryEmptyCell(currentBoard, enemyPlayer, botPlayer)
+	let arrayOfWeighBotMoves = getWeightForEveryEmptyCell(currentBoard, botPlayer, enemyPlayer)
 
-	if (isThereIsDangerForBot(arrayOfWeighEnemyPlayer))
-		return toCalculateNextDevensiveMove(arrayOfWeighEnemyPlayer)
-	else {
-		let anotherBotMove = getGeneratedCell()
-		while (!isAwailableCell(currentBoard, anotherBotMove))
-			anotherBotMove = getGeneratedCell()
+	let maxWeightOfEnemyPlayer = maxWeightOfPlayer(arrayOfWeighEnemyPlayerMoves)
+	let maxWeightOfBotPlayer = maxWeightOfPlayer(arrayOfWeighBotMoves)
 
-		return anotherBotMove
-	}
+	if (maxWeightOfBotPlayer === 0) return toGenerateRandomBotMove(currentBoard)
+
+	if (maxWeightOfEnemyPlayer < 3 ) return toGenerateAttackNextMove(arrayOfWeighBotMoves)
+
+	if (maxWeightOfEnemyPlayer <= maxWeightOfBotPlayer) return toGenerateAttackNextMove(arrayOfWeighBotMoves)
+
+	return toGenerateAttackNextMove(arrayOfWeighEnemyPlayerMoves)
 }
 
-function isThereIsDangerForBot(arrayOfWeight) {
+function toGenerateAttackNextMove(arrayOfWeighMoves) { return toCalculateNextLogicMove(arrayOfWeighMoves) }
+
+function isAwailableCell(currentBoard, anotherBotMove) { return currentBoard.board[anotherBotMove] === null }
+
+function getGeneratedCell() { return Math.trunc(Math.random() * Math.pow(SIZE_OF_BOARD, 2)) }
+
+function toGenerateRandomBotMove(currentBoard) {
+	let anotherBotMove = getGeneratedCell()
+	while (!isAwailableCell(currentBoard, anotherBotMove))
+		anotherBotMove = getGeneratedCell()
+			
+	return anotherBotMove
+}
+
+function maxWeightOfPlayer(arrayOfWeight) {
 	let maxWeight = 0
 
 	for (let anotherArrayOfWeight of arrayOfWeight) {
 		let maxAnotherArrayOfWeight = getMax(anotherArrayOfWeight)
 		maxWeight = maxWeight < maxAnotherArrayOfWeight ? maxAnotherArrayOfWeight : maxWeight 
-		if (maxWeight >= 3) return true
 	}
+	return maxWeight
 }
 
-function toCalculateNextDevensiveMove (arrayOfWeight) {
-	// debugger
-	let nextDevensiveMove = null
-	let optimizedArray = getOptimizedArray(arrayOfWeight)
+function toCalculateNextLogicMove (arrayOfWeightOfAttacker) {
+	let optimizedArray = getOptimizedArray(arrayOfWeightOfAttacker)
 
 	let countOfArraysThatHaveMaxWeight = getCountOfArraysThatHaveMaxWeight(optimizedArray)
 	let chosenMove = Math.trunc(Math.random() * countOfArraysThatHaveMaxWeight)
@@ -104,15 +134,11 @@ function getCountOfArraysThatHaveMaxWeight(optimizedArray) {
 	return optimizedArray.length
 }
 
-
-function toCalculateNextAttackMove (arrayOfWeight) {
-	return 'toCalculateNextAttackMove'
-}
-
 function getWeightForEveryEmptyCell(currentBoard, enemyPlayer, botPlayer) {
 	let cache = currentBoard.board.map((item, index) => {
 		
 		if (item !== null) return {}
+
 
 		let horizontalWeight = isHorizontalCellsSuffice(index) ? toLeft(index) + toRight(index) : 0
 		let verticalWeight = isVerticalCellsSuffice(index) ? toUp(index) + toDown(index) : 0
@@ -121,7 +147,7 @@ function getWeightForEveryEmptyCell(currentBoard, enemyPlayer, botPlayer) {
 
 		let maxWeight = Math.max(horizontalWeight, verticalWeight, mainDiagonalWeight, secondaryDiagonalWeight)
 
-		return maxWeight > 2 ? { horizontalWeight, verticalWeight, mainDiagonalWeight, secondaryDiagonalWeight, index: ''+index } : {}
+		return maxWeight > 0 ? { horizontalWeight, verticalWeight, mainDiagonalWeight, secondaryDiagonalWeight, index: ''+index } : {}
 	})
 
 	function isBothFalse(a, b) {
@@ -234,6 +260,7 @@ function getWeightForEveryEmptyCell(currentBoard, enemyPlayer, botPlayer) {
 	}
 
 	function toLeft(index) {
+		// if (index ===  48) debugger
 		for (let i = 1; i < 5; i++) {
 			if ((index - i) % SIZE_OF_BOARD === SIZE_OF_BOARD - 1) return i - 1
 			if (currentBoard.board[index - i] !== enemyPlayer) return i - 1

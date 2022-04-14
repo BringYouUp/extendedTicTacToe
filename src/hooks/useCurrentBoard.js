@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import useLocalStorage from './useLocalStorage'
-
 import {START_GAME} from './../consts'
 
 export default function useHistory (currentHistory) {

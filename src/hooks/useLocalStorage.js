@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function useLocalStorage (key, defaultValue) {
 	const [storedData, setStoredData] = useState(() => {
@@ -11,7 +11,7 @@ export default function useLocalStorage (key, defaultValue) {
 		return defaultValue
 	})
 
-	const setDataIntoLocalStorage = (key, value) => localStorage.setItem(key, JSON.stringify(value))
+	const setDataIntoLocalStorage = value => localStorage.setItem(key, JSON.stringify(value))
 
 	return [storedData, setDataIntoLocalStorage]
 }

@@ -9,7 +9,7 @@ export default function useHistory (key) {
 	const [history, setHistory] = useState(storedDataAboutHistory)
 
 	const updateHistory = actualHistory => setHistory(actualHistory)
-	useEffect(() => setDataAboutHistory(LS_BOARD, history), [history])
+	useEffect(() => setDataAboutHistory(history), [history])
 
 	return {history, updateHistory}
 }
