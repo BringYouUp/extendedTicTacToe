@@ -38,8 +38,11 @@ export default function useWinner (actualHistory) {
 const winnerStreakWithNextParams = (movesOfPrevPlayer, startPoint, step) => {
 	let winnerStreak = [startPoint]
 
-	for (let i = 1; i < 5; i++) {
-		if (!movesOfPrevPlayer.includes(startPoint + step * i)) return false
+	for (let i = 1; i < 15; i++) {
+		if (!movesOfPrevPlayer.includes(startPoint + step * i)) {
+			if (winnerStreak.length < 5) return false
+			return winnerStreak
+		}
 		winnerStreak.push(startPoint + step * i)
 	}
 

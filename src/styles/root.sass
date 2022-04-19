@@ -7,7 +7,7 @@ $b-width: .125rem
 #root
 	width: 100vw
 	height: 100vh
-	background-color: darkslateblue
+	background-color: #dddddd
 
 body
 	// overflow: hidden
@@ -27,12 +27,39 @@ ul
 .Header
 	display: flex
 	justify-content: flex-end
-
-
+	height: 3rem
+	& > div
+		background-position: center
+		background-repeat: no-repeat
+		background-size: 90%
+	&__newGame
+		width: 3rem
+		height: 3rem
+		background-image: url('./../img/refresh.png')
+	&__withBot
+		width: 3rem
+		height: 3rem
+		background-image: url('./../img/bot.png')
+	&__botFirst
+		width: 3rem
+		height: 3rem
+	&__history
+		width: 3rem
+		height: 3rem
+		position: relative
+		background-image: url('./../img/history.png')
+		.History
+			position: absolute
+			height: auto
+			border-bottom: 1px solid slategrey
+			overflow-y: auto
+			right: 0px
+			top: 3rem
+			width: 10rem
+			height: 10rem
 
 .GameMessage
 	padding-bottom: .5rem
-	border-bottom: 1px solid slategrey
 	text-align: center
 
 .GameOption
@@ -43,25 +70,17 @@ ul
 		&:hover
 			background-color: red
 
-.History
-	height: auto
-	border-bottom: 1px solid slategrey
-	overflow-y: auto
-	& button
-		padding: .5rem 0
-		border: 0
-		background-color: transparent
 
 .GameBoard
-	// flex-basis: 80%
 	width: 100%
+	height: calc(100vh - 2rem)
 	display: grid
 	grid-template: repeat(15, 40px) / repeat(15, 40px)
 	justify-content: center
 	align-content: center
 	& > div
-		border-right: 1px solid slategrey
-		border-bottom: 1px solid slategrey
+		border-right: 1px solid white
+		border-bottom: 1px solid white
 	& > div:nth-child(15n)
 		border-right: 0px solid transparent
 	& > div:nth-child(n+211)
@@ -72,11 +91,7 @@ ul
 	top: 0
 	right: 0
 	position: absolute
-	border-left: 1px solid slategrey
-	// flex-basis: 20%
-	// display: flex
-	// flex-direction: column
-	// padding-left: .5rem
+	border-left: 1px solid white
 	width: 20vw
 	height: 100vh
 	background: red
@@ -88,22 +103,27 @@ ul
 	top: .5rem
 
 .Cell
-	// background: yellow
 	color: black
 	cursor: pointer
 	background-position: center
 	background-repeat: no-repeat
 	background-size: contain
 	padding: 5px
+	border-radius: .5rem
+	&:hover
+		background-color: #f0f0f0
 	&.tic
 		background-image: url('./../img/tic.png')
+		background-color: #e5d5d5
 	&.tac
 		background-image: url('./../img/tac.png')
-	&.winner
-		background-color: red
+		background-color: #d6e1e5
+	&.tic.winner
+		background-color: #ffb0b0
+	&.tac.winner
+		background-color: #8fc3ff
+		
 
 .GameOption
 	height: fit-content
 
-.winner
-	background-color: red

@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-import useLocalStorage from './useLocalStorage'
-
-import {START_GAME, LS_BOARD} from './../consts'
+import {START_GAME} from './../consts'
 
 export default function useHistory (key) {
-	const [storedDataAboutHistory, setDataAboutHistory] = useLocalStorage(key, START_GAME)
-	const [history, setHistory] = useState(storedDataAboutHistory)
+	const [history, setHistory] = useState(START_GAME)
 
 	const updateHistory = actualHistory => setHistory(actualHistory)
-	useEffect(() => setDataAboutHistory(history), [history])
 
 	return {history, updateHistory}
 }
