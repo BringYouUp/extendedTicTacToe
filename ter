@@ -1,0 +1,59 @@
+[33mcommit 44bf0db32e70ce5335b12b4b1fe4190d68950e48[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: BringYouUp <bringupyou@gmail.com>
+Date:   Mon Apr 25 00:10:50 2022 +0300
+
+    I've redesigned application, added Header component, deleted unused hooks and components. Attempts have been made to makee the application more minimalistic. It is not final
+
+[33mcommit 2a26ff98365f6f38b99594507dabbc475a3ec296[m
+Author: BringYouUp <bringupyou@gmail.com>
+Date:   Tue Apr 19 20:34:32 2022 +0300
+
+    I've redesigned application, added Header component, deleted unused hooks and components. Attempts have been made to makee the application more minimalistic. It is not final
+
+[33mcommit 65bb49a30fdb586c65b901dbe2cabb7ea4032eaa[m
+Author: BringYouUp <bringupyou@gmail.com>
+Date:   Fri Apr 15 00:52:14 2022 +0300
+
+    bot attack and defense logic DONE git status! some rethinking the menu. some optimizations. add header component
+
+[33mcommit f39273db93c6a593ae205d1962572369a58a7bf4[m
+Author: BringYouUp <bringupyou@gmail.com>
+Date:   Thu Apr 7 18:59:32 2022 +0300
+
+    the defensive logic of bot is almost finished. Add such function as isCellsSuffice
+
+[33mcommit 5a4dd56a3f0ac0f7aaaddc504120cedd06011155[m
+Author: BringYouUp <bringupyou@gmail.com>
+Date:   Fri Apr 1 00:04:56 2022 +0300
+
+    added some function for bot logic such as: get weight every cell and parse it afterwards
+
+[33mcommit 2eff057922a0a8f3aa1409277e903a3c3b83399c[m
+Author: BringYouUp <bringupyou@gmail.com>
+Date:   Thu Mar 31 00:29:41 2022 +0300
+
+    added some optimization into custom hooks via React.memo & started developing bot's brain for the game
+
+[33mcommit 386e5bea306f2eeb3151b190050d8eb9a1052d60[m
+Author: BringYouUp <bringupyou@gmail.com>
+Date:   Thu Mar 24 00:18:26 2022 +0300
+
+    add some logic for my own bot
+
+[33mcommit 478ec64ddf755385281c38113b984105151f6ebf[m
+Author: BringYouUp <bringupyou@gmail.com>
+Date:   Tue Mar 22 22:25:02 2022 +0300
+
+    add some custom hooks
+
+[33mcommit 48162a5ddedfea464f730e1b7c2afec0b161fd41[m
+Author: BringYouUp <bringupyou@gmail.com>
+Date:   Tue Mar 15 22:31:09 2022 +0300
+
+    add new HOOK useWinner, some restylings
+
+[33mcommit be3ec471780a68e678a91ed316f80eb8ed955d6e[m
+Author: BringYouUp <bringupyou@gmail.com>
+Date:   Thu Mar 10 01:56:30 2022 +0300
+
+    the components and function for determining the winner were created
