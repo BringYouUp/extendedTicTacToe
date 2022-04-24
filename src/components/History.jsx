@@ -5,12 +5,16 @@ import './../styles/root.sass'
 const History = ({history, moveTo, moveToOut, currentBoard}) => {
 	
 	return (
-		<div onMouseLeave={() => moveToOut()} className="History">
+		<div onMouseLeave={() => moveToOut()} className="history">
 			<ul>
 				{
 					history.map((item, index) => (
 						<li key={index} onMouseEnter={() => {moveTo(index)}}>	
-							Go to move #{index}
+							{
+								index !== 0
+									? `Go to move #${index}`
+									: 'Start game'
+							}
 						</li>
 					))
 				}

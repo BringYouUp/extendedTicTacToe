@@ -11,16 +11,17 @@ const Header = ({startNewGame, winner, currentBoard, currentPlayer, isGameWithBo
 	const showHistory = () => updateDisplayingHistory(prev => !prev)
 
 	return (
-		<div className="Header">
+		<div className="header">
 			<GameMessage
 				winner={winner}
 				currentBoard={currentBoard}
 				currentPlayer={currentPlayer}
 			/>
-			<div title="to start new game" className="Header__newGame" onClick={() => {startNewGame()}}></div>
-			<div title="is game with bot" className="Header__withBot" onClick={() => {updateActivityOfBot(prev => !prev)}} style={{backgroundColor: `${isGameWithBot ? "red" : "transparent"}`}}></div>
-			<div title="is bot moves first" className="Header__botFirst" onClick={() => {setIsBotMovesFirst(prev => !prev)}} style={{backgroundColor: `${isBotMovesFirst ? "red" : "transparent"}`}}>1</div>
-			<div title="show history" className="Header__history" onClick={() => {showHistory()}} style={{isShowHistory: `${isBotMovesFirst ? "yellow" : "transparent"}`}}>
+			<div className="game-buttons">
+				<div className="game-buttons__new-game" onClick={() => {startNewGame()}}></div>
+				<div className={`${isGameWithBot ? 'game-buttons__bot-active' : 'game-buttons__bot'}`} onClick={() => {updateActivityOfBot(prev => !prev)}} />
+				<div className={`${isBotMovesFirst ? 'game-buttons__bot-first' : 'game-buttons__bot-not-first'}`} onClick={() => {setIsBotMovesFirst(prev => !prev)}} />
+				<div className="game-buttons__show-history" onClick={() => {showHistory()}} />
 				{
 					isShowHistory
 					? <History 
@@ -31,7 +32,7 @@ const Header = ({startNewGame, winner, currentBoard, currentPlayer, isGameWithBo
 					: null
 				}
 			</div>
-			
+
 		</div>)
 }
 

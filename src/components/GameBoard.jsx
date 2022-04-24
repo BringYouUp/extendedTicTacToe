@@ -5,7 +5,7 @@ import './../styles/root.sass'
 
 const GameBoard =({currentBoard, moveHandler, winner, winnerStreak}) => {
 	return (
-		<div className="GameBoard">
+		<div className="game-board">
 			{
 				currentBoard.map((anotherCellOfBoard, position) =>{
 					return <Cell

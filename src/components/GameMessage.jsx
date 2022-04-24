@@ -5,15 +5,49 @@ import './../styles/root.sass'
 const GameMessage = ({currentBoard, currentPlayer, winner}) => {
 	const isMovesLeft = currentBoard.some(item => item == null)
 	
+	const getMessageForWinner = () => {
+		if (!winner) return
+
+		return (
+			<>
+				<span style={{color: `${winner === 'X' ? 'red' : 'blue'}`}}>
+					{winner}
+				</span> is winner
+			</>
+		)
+	}
+
+	const getMessageForCurrentPlayer = () => {
+		if (!(!winner && isMovesLeft)) return
+
+		return (
+			<>
+				<span style={{color: `${currentPlayer === 'X' ? 'red' : 'blue'}`}}>
+					{currentPlayer} 
+				</span> move
+			</>
+		)
+	}
+
+	const getMessageForDraw = () => {
+		if (isMovesLeft) return
+
+		return (
+			<span style={{color: 'grey'}}>
+				DRAW
+			</span>
+		)
+	}
+
 	currentPlayer = currentPlayer ? 'X' : 'O'
 
 	return (
-		<div className="GameMessage">
-			{winner && `${winner} is winner`}
-
-			{!winner && isMovesLeft && `${currentPlayer} move`}
-
-			{!isMovesLeft && 'DRAW'}
+		<div className="game-message">
+			{
+				getMessageForWinner() ||
+				getMessageForCurrentPlayer() ||
+				getMessageForDraw()
+			}			
 		</div>
 	)
 }

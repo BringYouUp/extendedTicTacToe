@@ -3,12 +3,11 @@ import React from "react";
 import './../styles/root.sass'
 
 const Cell = ({value, moveHandler, winner, winnerStreak, position}) => {
-	// console.log(winnerStreak)
 	const finalStylesForCell = stylesArray =>stylesArray.join(' ')
 
 	const setClassNameForCell = () => {
 
-		const stylesForCurrectCell = ['Cell']
+		const stylesForCurrectCell = ['cell']
 
 		if (!value) return finalStylesForCell(stylesForCurrectCell)
 
