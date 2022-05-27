@@ -64,7 +64,6 @@ function getOptimizedArray(arrayOfWeight) {
 }
 
 function getCountOfArraysThatHaveMaxWeight(optimizedArray) {
-	// debugger
 	let maxWeight = getMax(optimizedArray[0])
 
 	for (let i = 0; i < optimizedArray.length; i++) {
@@ -77,9 +76,7 @@ function getCountOfArraysThatHaveMaxWeight(optimizedArray) {
 
 function getWeightForEveryEmptyCell(currentBoard, enemyPlayer, botPlayer) {
 	let cache = currentBoard.board.map((item, index) => {
-		
 		if (item !== null) return {}
-
 
 		let horizontalWeight = isHorizontalCellsSuffice(index) ? toLeft(index) + toRight(index) : 0
 		let verticalWeight = isVerticalCellsSuffice(index) ? toUp(index) + toDown(index) : 0
@@ -201,7 +198,6 @@ function getWeightForEveryEmptyCell(currentBoard, enemyPlayer, botPlayer) {
 	}
 
 	function toLeft(index) {
-		// if (index ===  48) debugger
 		for (let i = 1; i < 5; i++) {
 			if ((index - i) % SIZE_OF_BOARD === SIZE_OF_BOARD - 1) return i - 1
 			if (currentBoard.board[index - i] !== enemyPlayer) return i - 1

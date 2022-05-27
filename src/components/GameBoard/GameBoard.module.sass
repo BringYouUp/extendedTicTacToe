@@ -1,0 +1,10 @@
+@import './../../styles/template'
+
+.gameBoard
+	width: 100%
+	height: calc(100vh - #{$cell-size})
+	display: grid
+	grid-template: repeat($board-size, $cell-size) / repeat($board-size, $cell-size)
+	grid-gap: $cell-gap
+	justify-content: center
+	align-content: center

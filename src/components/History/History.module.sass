@@ -1,0 +1,27 @@
+@import './../../styles/template'
+
+.showHistory
+	background-image: url('./../../img/history.png')
+.history
+	width: max-content
+	position: absolute
+	height: auto
+	text-align: right
+	right: 0px
+	top: 2rem
+	max-height: calc(100vh - 4rem)
+	overflow-y: auto
+	margin-top: 0.5rem
+	background-color: $background-color
+	opacity: .66
+	& li
+		display: block
+		padding: .25rem .5rem
+		opacity: .5
+	& li:hover
+		background-color: #f0f0f0
+		font-weight: bold
+		opacity: 1	
+
+.occupied
+	@include occupiedCell

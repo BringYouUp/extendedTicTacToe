@@ -1,6 +1,6 @@
 import React from "react";
 
-import './../styles/root.sass'
+import styles from './GameMessage.module.sass'
 
 const GameMessage = ({currentBoard, currentPlayer, winner}) => {
 	const isMovesLeft = currentBoard.some(item => item == null)
@@ -10,9 +10,7 @@ const GameMessage = ({currentBoard, currentPlayer, winner}) => {
 
 		return (
 			<>
-				<span style={{color: `${winner === 'X' ? 'red' : 'blue'}`}}>
-					{winner}
-				</span> is winner
+				<span style={{color: `${winner === 'X' ? 'red' : 'blue'}`}}>{winner}</span> is a winner
 			</>
 		)
 	}
@@ -22,9 +20,7 @@ const GameMessage = ({currentBoard, currentPlayer, winner}) => {
 
 		return (
 			<>
-				<span style={{color: `${currentPlayer === 'X' ? 'red' : 'blue'}`}}>
-					{currentPlayer} 
-				</span> move
+				<span style={{color: `${currentPlayer === 'X' ? 'red' : 'blue'}`}}>{currentPlayer}</span> move
 			</>
 		)
 	}
@@ -33,16 +29,14 @@ const GameMessage = ({currentBoard, currentPlayer, winner}) => {
 		if (isMovesLeft) return
 
 		return (
-			<span style={{color: 'grey'}}>
-				DRAW
-			</span>
+			<span style={{color: 'grey'}}> DRAW </span>
 		)
 	}
 
 	currentPlayer = currentPlayer ? 'X' : 'O'
 
 	return (
-		<div className="game-message">
+		<div className={styles.gameMessage}>
 			{
 				getMessageForWinner() ||
 				getMessageForCurrentPlayer() ||

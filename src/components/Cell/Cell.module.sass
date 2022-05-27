@@ -1,0 +1,25 @@
+@import './../../styles/template'
+
+.cell
+	cursor: pointer
+	background-position: center
+	background-repeat: no-repeat
+	background-size: contain
+	padding: 5px
+	border-radius: $cell-border-radius
+	@include unOccupiedCell
+	&:active
+		@include occupiedCell
+.tic
+	background-image: url('./../../img/tic.png')
+	background-color: $tic-color
+.tac
+	background-image: url('./../../img/tac.png')
+	background-color: $tac-color
+.ticWinner
+	background-color: $tic-winner-color
+.tacWinner
+	background-color: $tac-winnew-color
+
+.occupied
+	@include occupiedCell

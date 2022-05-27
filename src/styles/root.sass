@@ -1,130 +1,29 @@
-$board-size: 10
-$cell-size: calc(85vmin / #{$board-size})
-$cell-border-radius: calc(#{$cell-size} / 5)
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap')
+@import 'template'
 
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap')
+*, *:before, *:after
+	margin: 0
 
 *
-	font-family: 'Ubuntu', sans-serif
-	margin: 0
+	font-family: 'Fredoka One', cursive
 	box-sizing: border-box
-	font-weight: 800
+	font-weight: 600
 	user-select: none
 	-webkit-tap-highlight-color: transparent
 
 #root
 	width: 100vw
 	height: 100vh
-	background-color: #dddddd
 
 body
+	font-size: calc(1vw + .6em)
 	overflow: hidden
+	background-color: $background-color
 
 ul
+	background-color: $background-color
 	padding: 0
 	list-style-type: none
-
-.game
-	position: relative
-	padding: .5rem
-	display: flex
-	flex-direction: column
-	width: inherit
-	height: inherit
-
-.header
-	display: flex
-	justify-content: center
-	height: 2.5rem
-	position: relative
-	.game-message
-		font-size: 2rem
-		padding: .25rem 0
-		text-align: center
-	.game-buttons
-		position: absolute
-		top: 0
-		right: 0
-		display: flex
-		& > div
-			background-position: center
-			background-repeat: no-repeat
-			background-size: 90%
-			width: 2.5rem
-			height: 2.5rem
-			&:not(:last-child)
-				border-radius: .5rem
-			&:not(:last-child):hover
-				background-color: #f0f0f0
-			&:not(:last-child):active
-				background-color: #f9f9f9
-		&__new-game
-			background-image: url('./../img/start.png')
-		&__bot
-			background-image: url('./../img/bot.png')
-		&__bot-active
-			background-image: url('./../img/bot-active.png')
-		&__bot-first
-			background-image: url('./../img/bot-first.png')
-		&__bot-not-first
-			background-image: url('./../img/bot-not-first.png')
-		&__show-history
-			background-image: url('./../img/history.png')
-		.history
-			position: absolute
-			height: auto
-			text-align: right
-			right: 0px
-			top: 3rem
-			width: auto
-			height: calc(100vh - 4rem)
-			overflow-y: auto
-			& li
-				display: block
-				padding: .25rem .5rem
-				opacity: .5
-				border-radius: .25rem
-			& li:hover
-				background-color: #f0f0f0
-				font-weight: bold
-				opacity: 1
-		
-.game-board
-	width: 100%
-	height: calc(100vh - 2.5rem)
-	display: grid
-	grid-template: repeat($board-size, $cell-size) / repeat($board-size, $cell-size)
-	justify-content: center
-	align-content: center
-	& > div
-		border-right: 1px solid white
-		border-bottom: 1px solid white
-	& > div:nth-child(#{$board-size}n)
-		border-right: 0px solid transparent
-	& > div:nth-child(n+#{$board-size * $board-size - $board-size + 1})
-		border-bottom: 0px solid transparent
-	.cell
-		color: black
-		cursor: pointer
-		background-position: center
-		background-repeat: no-repeat
-		background-size: contain
-		padding: 5px
-		border-radius: $cell-border-radius
-		&:hover
-			background-color: #f0f0f0
-		&:active
-			background-color: #f9f9f9	
-		&.tic
-			background-image: url('./../img/tic.png')
-			background-color: #e5d5d5
-		&.tac
-			background-image: url('./../img/tac.png')
-			background-color: #d6e1e5
-		&.tic.winner
-			background-color: #ffb0b0
-		&.tac.winner
-			background-color: #8fc3ff
 
 ::-webkit-scrollbar
 	cursor: pointer

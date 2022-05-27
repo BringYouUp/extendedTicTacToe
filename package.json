@@ -1,28 +1,43 @@
 {
   "name": "extended_tic_tac_toe",
-  "version": "0.2.0",
-  "description": "The default template project for [nano-react-app](https://github.com/nano-react-app/nano-react-app).",
+  "version": "0.5.0",
+  "description": "another application",
   "license": "MIT",
   "scripts": {
-    "start": "vite",
-    "build": "vite build"
+    "build": "webpack --mode production",
+    "dev": "webpack serve --mode development"
   },
+  "browserslist": [
+    "> 0.25%, not dead"
+  ],
   "dependencies": {
-    "@babel/runtime": "^7.17.2",
+    "core-js": "^3.22.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.5",
-    "babel-preset-nano-react-app": "^0.1.0",
+    "@babel/cli": "7.17.0",
+    "@babel/core": "^7.17.0",
+    "@babel/preset-env": "^7.17.10",
+    "@babel/preset-react": "^7.16.0",
+    "@svgr/webpack": "^6.2.1",
+    "autoprefixer": "^10.4.7",
+    "babel-loader": "^8.2.5",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "image-webpack-loader": "^8.1.0",
+    "mini-css-extract-plugin": "^2.6.0",
     "node-sass": "^7.0.1",
+    "path": "^0.12.7",
+    "postcss-loader": "^6.2.1",
     "sass": "^1.49.9",
-    "vite": "^2.6.7"
-  },
-  "babel": {
-    "presets": [
-      "nano-react-app"
-    ]
+    "sass-loader": "^12.6.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.0"
   },
   "main": "index.js",
   "author": "BringYouUp"

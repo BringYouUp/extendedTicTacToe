@@ -1,6 +1,8 @@
 dist
+edits-of-tic-tac-toe.txt
 firebase.json
 node_modules
 .cache
 .firebase
 .firebaserc
+.test_cache

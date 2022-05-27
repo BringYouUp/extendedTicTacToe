@@ -1,0 +1,27 @@
+{
+	"name": "extendedTicTacToe",
+	"short_name": "eTTT",
+	"lang": "en-US",
+	"start_url": "/",
+	"display": "standalone",
+	"theme_color": "#dddddd",
+	"background_color": "#dddddd",
+	"icons": [{
+		"src": "src/img/title-icon.png",
+		"sizes": "512x512",
+		"type": "image/png"
+	}],
+	"shortcuts": [
+		{
+			"name": "Play",
+			"description": "View the list of podcasts you saved for later",
+			"url": "/play-later",
+			"icons": [{
+				"src": "src/img/bot.png",
+				"sizes": "512x512",
+				"type": "image/png"
+				
+			}]
+		}
+	]
+}

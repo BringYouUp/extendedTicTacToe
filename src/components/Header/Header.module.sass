@@ -1,0 +1,58 @@
+@import './../../styles/template'
+
+.header
+	display: flex
+	justify-content: center
+	height: $cell-size
+	position: relative
+	padding-bottom: 0.25rem
+	text-transform: uppercase
+
+.gameButtons
+	position: absolute
+	top: 0
+	right: 0
+	display: flex
+	& > div
+		background-position: center
+		background-repeat: no-repeat
+		background-size: 90%
+		border-radius: .5rem
+		@include unOccupiedCell
+		&:not(:last-child):active
+			@include occupiedCell
+	& > div:not(:last-child)
+		width: $cell-size
+		height: $cell-size
+	& > div.occupied
+		@include occupiedCell
+	& > div + div
+		margin-left: .5rem
+	& img
+		width: $cell-size
+
+.showHistory
+	background-image: url('./../../img/history.png')
+.history
+	width: max-content
+	position: absolute
+	height: auto
+	text-align: right
+	right: 0px
+	top: 2rem
+	max-height: calc(100vh - 4rem)
+	overflow-y: auto
+	margin-top: 0.5rem
+	background-color: $background-color
+	opacity: .66
+	& li
+		display: block
+		padding: .25rem .5rem
+		opacity: .5
+	& li:hover
+		background-color: #f0f0f0
+		font-weight: bold
+		opacity: 1	
+
+.occupied
+	@include occupiedCell

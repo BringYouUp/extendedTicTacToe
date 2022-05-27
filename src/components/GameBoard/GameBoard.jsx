@@ -1,11 +1,11 @@
 import React from "react";
-import Cell from "./Cell"
+import Cell from "./../Cell/Cell"
 
-import './../styles/root.sass'
+import styles from './GameBoard.module.sass'
 
 const GameBoard =({currentBoard, moveHandler, winner, winnerStreak}) => {
 	return (
-		<div className="game-board">
+		<div className={styles.gameBoard}>
 			{
 				currentBoard.map((anotherCellOfBoard, position) =>{
 					return <Cell

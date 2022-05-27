@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 
 import useCurrentBoard from './useCurrentBoard'
 
@@ -6,8 +6,8 @@ import getNextMoveOfBot from './../helpers/botMovesGenerator'
 
 import { SIZE_OF_BOARD } from './../consts'
 
-const useBot = currentHistory => {
-	const [ isGameWithBot, updateActivityOfBot ] = useState(false)
+const useBot = (currentHistory, gameID) => {
+	const [ isGameWithBot, setActivityOfBot ] = useState(false)
 
 	const [ isBotMovesFirst, setIsBotMovesFirst ] = useState(false)
 
@@ -16,21 +16,34 @@ const useBot = currentHistory => {
 	const [ moveOfBot, setMoveOfBot ] = useState(NaN)
 	const { currentBoard } = useCurrentBoard(currentHistory)
 
-	const startNewGameWithBot = isBotMoveFirst => setIsBotMoveNext(isBotMoveFirst)
+	const makeMove = () => setIsBotMoveNext(prev => !prev)
 
-	const makeMove = () => {
-		setIsBotMoveNext(prev => !prev)
-
+	const directlyMakeMove = () => {
 		if (!isGameWithBot || !isBotMoveNext) return
 
-		let anotherBotMove = getNextMoveOfBot(currentBoard)
-
-		setMoveOfBot(anotherBotMove)	
+		setMoveOfBot(getNextMoveOfBot(currentBoard))
 	}
 
-	useEffect (() => makeMove(), [currentBoard.board])
+	const updateActivityOfBot = () => setActivityOfBot(prev => !prev)
 
-	return { moveOfBot, isGameWithBot, updateActivityOfBot, startNewGameWithBot, isBotMovesFirst, setIsBotMovesFirst, makeMove, setIsBotMoveNext }
+	const updateIsBotMovesFirst = () => setIsBotMovesFirst(prev => !prev)
+
+	const startingGame = () => {
+		if (!isGameWithBot) return
+
+		setIsBotMoveNext(isBotMovesFirst)
+	}
+
+	useEffect (() => {
+		if (currentHistory.length === 1)
+			startingGame()
+		else
+			makeMove()
+	}, [currentBoard, gameID])
+
+	useEffect(() => directlyMakeMove(), [isBotMoveNext])
+
+	return { moveOfBot, isGameWithBot, isBotMovesFirst, updateActivityOfBot, updateIsBotMovesFirst }
 }
 
 export default useBot
