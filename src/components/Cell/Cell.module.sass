@@ -13,9 +13,13 @@
 .tic
 	background-image: url('./../../img/tic.png')
 	background-color: $tic-color
+	animation-name: displayingMove
+	animation-duration: .33s
 .tac
 	background-image: url('./../../img/tac.png')
 	background-color: $tac-color
+	animation-name: displayingMove
+	animation-duration: .33s
 .ticWinner
 	background-color: $tic-winner-color
 .tacWinner
@@ -23,3 +27,9 @@
 
 .occupied
 	@include occupiedCell
+
+@keyframes displayingMove
+	0%
+		filter: brightness(.75)
+	100%
+		filter: brightness(1)

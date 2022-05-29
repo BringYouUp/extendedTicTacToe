@@ -17,7 +17,7 @@ const App = () => {
 	const [ gameID, setGameID ] = useState(Date.now())
 	const { currentBoard, updateCurrentBoard } = useCurrentBoard(history)
 	const { winner, winnerStreak } = useWinner(history)
-	const { moveOfBot, isGameWithBot, updateActivityOfBot, isBotMovesFirst, updateIsBotMovesFirst } = useBot(history, gameID)
+	const { moveOfBot, isGameWithBot, updateActivityOfBot, isBotMovesFirst, updateIsBotMovesFirst, setPause } = useBot(history, gameID)
 
 	const moveHandler = anotherMove => {
 		if (!Number.isInteger(anotherMove) || currentBoard.board[anotherMove] || winner) return
@@ -29,19 +29,16 @@ const App = () => {
 	}
 
 	const startNewGame = () => {
-		updateHistory([{
-			board: new Array(SIZE_OF_BOARD ** 2).fill(null),
-			isXNext: true
-		}])
+		updateHistory(START_GAME)
 		setGameID(prev => Date.now())
+		setPause(false)
 	}
 
 	const moveTo = position => updateCurrentBoard(position)
 	const moveToOut = position => updateCurrentBoard(history.length - 1)
 
-	useEffect(() => {
-		moveHandler(moveOfBot)
-	}, [moveOfBot])
+	useEffect(() => moveHandler(moveOfBot), [moveOfBot])
+	useEffect(() => winner ? setPause(true) : null, [winner])
 
 	return (
 		<div className={styles.game}>

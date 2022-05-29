@@ -9,7 +9,7 @@ function getNextMoveOfBot(currentBoard) {
 
 	let maxWeightOfEnemyPlayer = maxWeightOfPlayer(arrayOfWeighEnemyPlayerMoves)
 	let maxWeightOfBotPlayer = maxWeightOfPlayer(arrayOfWeighBotMoves)
-
+	// return toGenerateRandomBotMove(currentBoard)
 	if (maxWeightOfBotPlayer === 0) return toGenerateRandomBotMove(currentBoard)
 
 	if (maxWeightOfEnemyPlayer < 3 ) return toGenerateAttackNextMove(arrayOfWeighBotMoves)
@@ -25,9 +25,19 @@ function isAwailableCell(currentBoard, anotherBotMove) { return currentBoard.boa
 
 function getGeneratedCell() { return Math.trunc(Math.random() * Math.pow(SIZE_OF_BOARD, 2)) }
 
+function isGeneratedCellIsAppropriate(anotherGeneratedCell) {
+	if (anotherGeneratedCell < SIZE_OF_BOARD * 2 - 1) return
+	if (anotherGeneratedCell >= SIZE_OF_BOARD ** 2 - SIZE_OF_BOARD * 2) return
+
+	if (anotherGeneratedCell % SIZE_OF_BOARD < 2 ) return
+	if (anotherGeneratedCell % SIZE_OF_BOARD >= SIZE_OF_BOARD - 2 ) return
+
+	return true
+}
+
 function toGenerateRandomBotMove(currentBoard) {
 	let anotherBotMove = getGeneratedCell()
-	while (!isAwailableCell(currentBoard, anotherBotMove))
+	while (!isGeneratedCellIsAppropriate(anotherBotMove) || !isAwailableCell(currentBoard, anotherBotMove))
 		anotherBotMove = getGeneratedCell()
 			
 	return anotherBotMove

@@ -1,6 +1,15 @@
 https://extended-tic-tac-toe.web.app/
 
-VER. 0.5.0
+--- VER. 0.6.0 ---
+
+	** FIXED
+		- first move of bot is not near game area borders
+		- now the bot makes the first move, after losing and restarting
+	** STYLES
+		- added style of active history
+		- added new move style effect
+
+--- VER. 0.5.0 ---
 
 	COMMON
 		- the structure of project has been changed
