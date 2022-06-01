@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import HeaderItem from './../HeaderItem/HeaderItem'
+
 import styles from './History.module.sass'
 
 import imgHistory from './../../img/history.png'
@@ -11,12 +13,12 @@ const History = ({ history, moveTo, moveToOut, currentBoard }) => {
 
 	return (
 		<>
-			<div
+			<HeaderItem
 				title="show history"
 				onClick={() => {showHistory()}}
 				className={isShowHistory ? styles.occupied : ""} >
 				<img src={imgHistory} alt="" />
-			</div>
+			</HeaderItem>
 
 			<div
 				style={{"visibility" : isShowHistory ? "visible" : "hidden"}}

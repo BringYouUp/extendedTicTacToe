@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import {SIZE_OF_BOARD} from './../consts'
-import {isValidToRight, isValidToDown, isValidToDiagonal} from './../helpers/isValid'
+import { SIZE_OF_BOARD, WIN_STREAK } from './../consts'
+import { isValidToRight, isValidToDown, isValidToDiagonal } from './../helpers/isValid'
 
 export default function useWinner (actualHistory) {
 	const [winner, setWinner] = useState(null)
@@ -12,7 +12,7 @@ export default function useWinner (actualHistory) {
 
 		const movesOfPrevPlayer = actualHistory.at(-1).board.reduce((acc, valueOfCell, indexOfCell) =>  valueOfCell === prevPlayer ? [...acc, indexOfCell] : acc, [])
 
-		if (movesOfPrevPlayer.length < 5) {
+		if (movesOfPrevPlayer.length < WIN_STREAK) {
 			setWinner(null)
 			setWinnerStreak([])
 		}
@@ -40,7 +40,7 @@ const winnerStreakWithNextParams = (movesOfPrevPlayer, startPoint, step) => {
 
 	for (let i = 1; i < 15; i++) {
 		if (!movesOfPrevPlayer.includes(startPoint + step * i)) {
-			if (winnerStreak.length < 5) return false
+			if (winnerStreak.length < WIN_STREAK) return false
 			return winnerStreak
 		}
 		winnerStreak.push(startPoint + step * i)

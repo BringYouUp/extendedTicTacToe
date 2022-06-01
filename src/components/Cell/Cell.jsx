@@ -26,7 +26,8 @@ const Cell = ({value, moveHandler, winner, winnerStreak, position}) => {
 	}
 
 	return (
-		<div onClick={moveHandler} className={setClassNameForCell()} />)
+		<div onClick={moveHandler} className={setClassNameForCell()} ></div>)
+		// <div onClick={moveHandler} className={setClassNameForCell()} >{position}</div>)
 } 
 
 export default Cell

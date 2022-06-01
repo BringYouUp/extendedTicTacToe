@@ -25,23 +25,25 @@ module.exports = {
 		rules: [{
 				test: /\.(js|jsx)$/i,
 				exclude: /node_modules/,
-				use: {
-					loader: 'babel-loader',
-					options: {
-						"presets": [
-							[
-								'@babel/preset-react'
+				use: [
+					{
+						loader: 'babel-loader',
+						options: {
+							"presets": [
+								[
+									'@babel/preset-react'
+								],
+								[
+									"@babel/preset-env",
+									{
+										"useBuiltIns": "usage",
+										"corejs": "3.22.7"
+									}
+								],
 							],
-							[
-								"@babel/preset-env",
-								{
-									"useBuiltIns": "usage",
-									"corejs": "3.22.7"
-								}
-							],
-						],
-					}
-				}
+						}
+					},
+				]
 			},
 			{
 				test: /\.(sa|sc|c)ss$/i,
@@ -60,15 +62,6 @@ module.exports = {
 					},
 					{
 						loader: 'postcss-loader',
-						options: {
-							postcssOptions: {
-								plugins: [
-									[
-										"autoprefixer",
-									],
-								],
-							},
-						},
 					},
 					{
 						loader: 'sass-loader'

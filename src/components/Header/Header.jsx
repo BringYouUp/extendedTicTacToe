@@ -2,6 +2,7 @@ import React from "react";
 
 import History from './../History/History'
 import GameMessage from './../GameMessage/GameMessage'
+import HeaderItem from './../HeaderItem/HeaderItem'
 
 import styles from './Header.module.sass'
 
@@ -11,7 +12,7 @@ import imgBotActive from './../../img/bot-active.png'
 import imgBotFirst from './../../img/bot-first.png'
 import imgBotNotFirst from './../../img/bot-not-first.png'
 
-const Header = ({startNewGame, winner, currentBoard, currentPlayer, isGameWithBot , isBotMovesFirst, history, moveTo, moveToOut, updateActivityOfBot, updateIsBotMovesFirst}) => {
+export default function Header ({startNewGame, winner, currentBoard, currentPlayer, isGameWithBot , isBotMovesFirst, history, moveTo, moveToOut, updateActivityOfBot, updateIsBotMovesFirst}) {
 
 	return (
 		<div className={styles.header}>
@@ -21,25 +22,25 @@ const Header = ({startNewGame, winner, currentBoard, currentPlayer, isGameWithBo
 				currentPlayer={currentPlayer}
 			/>
 			<div className={styles.gameButtons}>
-				<div
+				<HeaderItem
 					title="start a new game"
 					onClick={() => {startNewGame()}} >
 					<img src={imgNewGame} alt="" />
-				</div>
+				</HeaderItem>
 
-				<div
+				<HeaderItem
 					title="set the game with a bot"
 					className={isGameWithBot ? styles.occupied : null}
 					onClick={() => {updateActivityOfBot(); startNewGame()}} >
 					<img src={isGameWithBot ? imgBotActive : imgBot} alt="" />	
-				</div>
+				</HeaderItem>
 
-				<div
+				<HeaderItem
 					title="change a first player"
 					className={isGameWithBot ? styles.occupied : null}
 					onClick={() => {updateIsBotMovesFirst(); startNewGame()}} >
 					<img src={isBotMovesFirst ? imgBotFirst : imgBotNotFirst} alt="" />
-				</div>
+				</HeaderItem>
 
 				<History
 					history={history}
@@ -51,5 +52,4 @@ const Header = ({startNewGame, winner, currentBoard, currentPlayer, isGameWithBo
 		</div>)
 }
 
-export default Header
 

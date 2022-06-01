@@ -1,5 +1,10 @@
 https://extended-tic-tac-toe.web.app/
 
+--- VER. 0.7.0 ---
+
+
+
+
 --- VER. 0.6.0 ---
 
 	** FIXED
