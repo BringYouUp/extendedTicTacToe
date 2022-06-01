@@ -2,8 +2,11 @@ https://extended-tic-tac-toe.web.app/
 
 --- VER. 0.7.0 ---
 
-
-
+	** FIXED
+		- added priority. The bot is smarter and more dangerous )))
+		- bot strives to make move as close to the center as possible
+	** COMMON
+		- winstreak can be a random number : whether it is 5 or 7
 
 --- VER. 0.6.0 ---
 
