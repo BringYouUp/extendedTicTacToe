@@ -1,6 +1,6 @@
 https://extended-tic-tac-toe.web.app/
 
---- VER. 0.7.0 ---
+--- VER. 0.7.5 ---
 
 	** FIXED
 		- added priority. The bot is smarter and more dangerous )))
