@@ -8,11 +8,14 @@ const isDevelopment = process.env.NODE_ENV === 'development'
 
 module.exports = {
 	mode: isDevelopment ? 'development' : 'production',
-	entry: { app: path.resolve(__dirname, './src/index.js') },
+	entry: {
+		app: path.resolve(__dirname, './src/index.js'),
+	},
 	output: {
 		path: path.resolve(__dirname, './dist/'),
 		filename: isDevelopment ? '[name].js' : '[name].[contenthash].js',
 	},
+	target: isDevelopment ? "web" : "browserslist",
 	watchOptions: {
 		ignored: /node_modules/,
 	},
@@ -37,7 +40,7 @@ module.exports = {
 									"@babel/preset-env",
 									{
 										"useBuiltIns": "usage",
-										"corejs": "3.22.7"
+										"corejs": "3"
 									}
 								],
 							],
@@ -70,14 +73,13 @@ module.exports = {
 				],
 			},
 			{
-				test: /\.(png|svg)$/i,
+				test: /\.(gif|png|jpe?g|svg)$/i,
 				exclude: /node_modules/,
 				type: 'asset/resource',
 				generator: {
 					filename: 'img/[name][ext]'
 				}
 			}
-
 		],
 	},
 	plugins: [
@@ -85,6 +87,7 @@ module.exports = {
 		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
 			template: path.join(__dirname, 'index.html'),
+			favicon: "./src/img/title-icon.png",
 		}),
 		new MiniCssExtractPlugin({
 			filename: isDevelopment ? '[name].css' : '[name].[contenthash].css',

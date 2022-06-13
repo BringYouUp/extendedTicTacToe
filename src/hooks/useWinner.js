@@ -8,9 +8,9 @@ export default function useWinner (actualHistory) {
 	const [winnerStreak, setWinnerStreak] = useState([])
 
 	useEffect(() => {
-		const prevPlayer = actualHistory.at(-1).isXNext ? 'O' : 'X'  
+		const prevPlayer = actualHistory[actualHistory.length - 1].isXNext ? 'O' : 'X'  
 
-		const movesOfPrevPlayer = actualHistory.at(-1).board.reduce((acc, valueOfCell, indexOfCell) =>  valueOfCell === prevPlayer ? [...acc, indexOfCell] : acc, [])
+		const movesOfPrevPlayer = actualHistory[actualHistory.length - 1].board.reduce((acc, valueOfCell, indexOfCell) =>  valueOfCell === prevPlayer ? [...acc, indexOfCell] : acc, [])
 
 		if (movesOfPrevPlayer.length < WIN_STREAK) {
 			setWinner(null)
@@ -19,10 +19,10 @@ export default function useWinner (actualHistory) {
 
 		for (let move of movesOfPrevPlayer) {
 			let isWinnerThere =
-				isValidToRight(move, SIZE_OF_BOARD) && winnerStreakWithNextParams(movesOfPrevPlayer, move, 1) ||
-				isValidToDown(move, SIZE_OF_BOARD) && winnerStreakWithNextParams(movesOfPrevPlayer, move, SIZE_OF_BOARD) ||
-				isValidToDiagonal(move, SIZE_OF_BOARD, 1) && winnerStreakWithNextParams(movesOfPrevPlayer, move, SIZE_OF_BOARD + 1) ||
-				isValidToDiagonal(move, SIZE_OF_BOARD, -1) && winnerStreakWithNextParams(movesOfPrevPlayer, move, SIZE_OF_BOARD - 1)
+				isValidToRight(move) && winnerStreakWithNextParams(movesOfPrevPlayer, move, 1) ||
+				isValidToDown(move) && winnerStreakWithNextParams(movesOfPrevPlayer, move, SIZE_OF_BOARD) ||
+				isValidToDiagonal(move, 1) && winnerStreakWithNextParams(movesOfPrevPlayer, move, SIZE_OF_BOARD + 1) ||
+				isValidToDiagonal(move, -1) && winnerStreakWithNextParams(movesOfPrevPlayer, move, SIZE_OF_BOARD - 1)
 				
 			if (isWinnerThere) {
 				setWinner(prevPlayer)
@@ -30,7 +30,7 @@ export default function useWinner (actualHistory) {
 				return
 			}
 		}		
-	}, [actualHistory.at(-1).board])
+	}, [actualHistory[actualHistory.length - 1].board])
 
 	return { winner, winnerStreak }
 }

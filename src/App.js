@@ -9,6 +9,7 @@ import Header from './components/Header/Header'
 import GameBoard from './components/GameBoard/GameBoard'
 
 import { START_GAME, SIZE_OF_BOARD } from './consts'
+import moveHandler from './helpers/moveHandler.js'
 
 import styles from './App.module.sass'
 
@@ -19,25 +20,7 @@ const App = () => {
 	const { winner, winnerStreak } = useWinner(history)
 	const { moveOfBot, isGameWithBot, updateActivityOfBot, isBotMovesFirst, updateIsBotMovesFirst, setPause } = useBot(history, gameID)
 
-	const moveHandler = anotherMove => {
-		if (!Number.isInteger(anotherMove) || currentBoard.board[anotherMove] || winner) return
-
-		let newIsXNext = !currentBoard.isXNext
-		let newBoard = currentBoard.board.map((item, index) => index === anotherMove ? currentBoard.isXNext ? 'X' : 'O' : item)
-
-		updateHistory(prev => [...prev, {board: newBoard, isXNext: newIsXNext}])
-	}
-
-	const startNewGame = () => {
-		updateHistory(START_GAME)
-		setGameID(prev => Date.now())
-		setPause(false)
-	}
-
-	const moveTo = position => updateCurrentBoard(position)
-	const moveToOut = position => updateCurrentBoard(history.length - 1)
-
-	useEffect(() => moveHandler(moveOfBot), [moveOfBot])
+	useEffect(() => moveHandler(moveOfBot, currentBoard, winner, updateHistory), [moveOfBot])
 	useEffect(() => winner ? setPause(true) : null, [winner])
 
 	return (
@@ -50,15 +33,16 @@ const App = () => {
 				winner={winner}
 				currentBoard={currentBoard.board}
 				currentPlayer={currentBoard.isXNext}
-				startNewGame={startNewGame}
+				updateHistory={updateHistory}
+				setGameID={setGameID}
+				setPause={setPause}
 				history={history}
-				moveTo={moveTo}
-				moveToOut={moveToOut}
+				updateCurrentBoard={updateCurrentBoard}
 			/>
 		
 			<GameBoard
-				currentBoard={currentBoard.board}
-				moveHandler={moveHandler}
+				currentBoard={currentBoard}
+				updateHistory={updateHistory}
 				winner={winner}
 				winnerStreak={winnerStreak}
 			/>

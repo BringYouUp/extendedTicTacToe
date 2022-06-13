@@ -1,11 +1,15 @@
-const isValidToRight = (startPoint, SIZE_OF_BOARD) => ![0, 1, 2, 3].includes((startPoint + 4) % SIZE_OF_BOARD)
+import {SIZE_OF_BOARD, WIN_STREAK} from './../consts.js'
 
-const isValidToDown = (startPoint, SIZE_OF_BOARD) => startPoint + 4 * SIZE_OF_BOARD < SIZE_OF_BOARD ** 2
+const isValidToRight = startPoint => ![0, 1, 2, 3].includes((startPoint + WIN_STREAK - 1) % SIZE_OF_BOARD)
 
-const isValidToDiagonal = (startPoint, SIZE_OF_BOARD, diagonal) => {
+const isValidToDown = startPoint => startPoint + (WIN_STREAK - 1) * SIZE_OF_BOARD < SIZE_OF_BOARD ** 2
+
+const isValidToDiagonal = (startPoint, diagonal) => {
 	const arr = new Array(SIZE_OF_BOARD).fill(null).map((item, index) => index)
-	const finalValue = startPoint + 4 * (SIZE_OF_BOARD + diagonal)
-	const forbiddenCells = diagonal > 0 ? arr.slice(0, 4) : arr.slice(-4)
+
+	const finalValue = startPoint + (WIN_STREAK - 1) * (SIZE_OF_BOARD + diagonal)
+	
+	const forbiddenCells = diagonal > 0 ? arr.slice(0, WIN_STREAK - 1) : arr.slice(- WIN_STREAK + 1)
 
 	if (!forbiddenCells.includes(finalValue % SIZE_OF_BOARD) && finalValue < SIZE_OF_BOARD ** 2) return true
 }

@@ -1,27 +1,27 @@
 @import './../../styles/template'
 
-.showHistory
-	background-image: url('./../../img/history.png')
 .history
-	z-index: 1
+	z-index: 2
 	width: max-content
 	position: absolute
 	height: auto
 	text-align: right
 	right: 0px
 	top: calc(#{$cell-size} + 0.5rem)
-	max-height: calc(100vh - 4rem)
+	max-height: calc(100vh - #{$cell-size} - 1.5rem)
 	overflow-y: auto
 	background-color: $background-color
 	opacity: .66
-	& li
+	border-radius: $cell-border-radius
+	@include unOccupiedCell
+	li
 		display: block
-		padding: .25rem .5rem
+		height: $cell-size
+		padding: calc(#{$cell-size} / 4)
 		opacity: .5
-	& li:hover
+		font-size: calc(#{$cell-size} / 2)
+		text-transform: uppercase
+	li:hover
 		background-color: #f0f0f0
 		font-weight: bold
 		opacity: 1	
-
-.occupied
-	@include occupiedCell

@@ -7,21 +7,21 @@
 *
 	font-family: 'Fredoka One', cursive
 	box-sizing: border-box
-	font-weight: 600
 	user-select: none
 	-webkit-tap-highlight-color: transparent
 
-#root
+body
+	font-size: calc(1vw + .6em)
+	// overflow: hidden
+	background-color: $background-color
 	width: 100vw
 	height: 100vh
 
-body
-	font-size: calc(1vw + .6em)
-	overflow: hidden
-	background-color: $background-color
+body > div
+	width: 100%
+	height: 100%
 
 ul
-	background-color: $background-color
 	padding: 0
 	list-style-type: none
 

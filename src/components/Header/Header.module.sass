@@ -1,32 +1,29 @@
 @import './../../styles/template'
 
 .header
+	position: relative
 	display: flex
 	justify-content: center
 	height: $cell-size
-	position: relative
-	padding-bottom: 0.25rem
 	text-transform: uppercase
-
 .gameButtons
 	position: absolute
 	top: 0
 	right: 0
 	display: flex
-	& > div
-		background-position: center
-		background-repeat: no-repeat
-		background-size: 90%
-		border-radius: .5rem
-		@include unOccupiedCell
-		&:not(:last-child):active
-			@include occupiedCell
-	& > div:not(:last-child)
-		width: $cell-size
-		height: $cell-size
-	& > div.occupied
-		@include occupiedCell
 	& > div + div
 		margin-left: $cell-gap
 	& img
 		width: $cell-size
+
+.headerElement
+	@include headerElement
+	@include unOccupiedCell
+	&:active
+		@include occupiedCell
+
+.occupied
+	@include occupiedCell
+
+.unOccupied
+	@include unOccupiedCell

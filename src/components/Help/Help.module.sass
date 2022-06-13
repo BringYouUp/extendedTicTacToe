@@ -1,0 +1,45 @@
+@import './../../styles/template'
+
+.help
+	position: fixed
+	z-index: 2
+	bottom: 0
+	right: 0
+	display: flex
+	width: calc( 100% - 2 * .5rem)
+	height: calc( 100% - 2 * .5rem - #{$cell-size})
+	justify-content: center
+	align-items: center
+	margin: .5rem
+
+.helpStation
+	display: flex
+	align-items: center
+	border-radius: $cell-border-radius
+	min-width: 85vmin
+	min-height: 85vmin
+	max-width: 85vmin
+	max-height: 85vmin
+	background-color: $background-color
+	@include occupiedCell
+	ul
+		width: 100%
+	li
+		display: flex
+		justify-content: space-between
+		height: $cell-size
+		margin: 0 $cell-size
+	li:not(:last-child)
+		margin-bottom: calc(#{$cell-gap} + #{$cell-size})
+
+	span
+		display: inline-block
+		font-size: calc(#{$cell-size} / 2)
+		padding: calc(#{$cell-size} / 4) 0
+		text-transform: uppercase
+		border-bottom: 1px solid grey
+
+.helpElement
+	@include headerElement
+	display: inline-block
+	@include unOccupiedCell

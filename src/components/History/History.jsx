@@ -1,49 +1,34 @@
 import React, { useState } from "react";
 
-import HeaderItem from './../HeaderItem/HeaderItem'
 
 import styles from './History.module.sass'
 
 import imgHistory from './../../img/history.png'
 
-const History = ({ history, moveTo, moveToOut, currentBoard }) => {
-	const [isShowHistory, updateDisplayingHistory] = useState(false)
-
-	const showHistory = () => updateDisplayingHistory(prev => !prev)
-
+const History = ({isShowHistory, history, updateCurrentBoard }) => {
 	return (
-		<>
-			<HeaderItem
-				title="show history"
-				onClick={() => {showHistory()}}
-				className={isShowHistory ? styles.occupied : ""} >
-				<img src={imgHistory} alt="" />
-			</HeaderItem>
-
-			<div
-				style={{"visibility" : isShowHistory ? "visible" : "hidden"}}
-				onMouseLeave={() => moveToOut()}
-				className={styles.history}>
-				<ul>
-					{
-						history.map((item, index) => (
-							<li key={index} onMouseEnter={() => {moveTo(index)}}>	
-								{
-									index !== 0
-										? `Go to move #${index}`
-										: 'Start game'
-								}
-							</li>
-						))
-					}
-				</ul>
-			</div>
-		</>
+		<div
+			style={{"display" : isShowHistory ? "block" : "none"}}
+			onMouseLeave={() => updateCurrentBoard(history.length - 1)}
+			className={styles.history}>
+			<ul>
+				{
+					history.map((item, index) => (
+						<li key={index} onMouseEnter={() => {updateCurrentBoard(index)}}>	
+							{
+								index !== 0
+									? `Go to move #${index}`
+									: 'Start game'
+							}
+						</li>
+					))
+				}
+			</ul>
+		</div>
 	)
 }
 
 const areEqual = (prevProps, nextProps) => prevProps.history === nextProps.history
 
 export default React.memo(History, areEqual)
-
 
