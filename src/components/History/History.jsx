@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 
-
 import styles from './History.module.sass'
 
-import imgHistory from './../../img/history.png'
+import { IMG_HISTORY } from './../../consts.js'
 
 const History = ({isShowHistory, history, updateCurrentBoard }) => {
 	return (

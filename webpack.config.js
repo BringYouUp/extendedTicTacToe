@@ -20,9 +20,17 @@ module.exports = {
 		ignored: /node_modules/,
 	},
 	devServer: {
+		static: {
+			directory: path.join(__dirname, '/public/'),
+		},
 		historyApiFallback: true,
+		compress: true,
 		port: 8081,
 		open: true,
+		client: {
+	      overlay: true,
+	      progress: true,
+	    },
 	},
 	module: {
 		rules: [{

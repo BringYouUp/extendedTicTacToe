@@ -14,4 +14,4 @@ const isValidToDiagonal = (startPoint, diagonal) => {
 	if (!forbiddenCells.includes(finalValue % SIZE_OF_BOARD) && finalValue < SIZE_OF_BOARD ** 2) return true
 }
 
-export {isValidToRight, isValidToDown, isValidToDiagonal}
+export { isValidToRight, isValidToDown, isValidToDiagonal }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { SIZE_OF_BOARD, WIN_STREAK } from './../consts'
-import { isValidToRight, isValidToDown, isValidToDiagonal } from './../helpers/isValid'
+import { isValidToRight, isValidToDown, isValidToDiagonal } from './../services/index.js'
 
 export default function useWinner (actualHistory) {
 	const [winner, setWinner] = useState(null)

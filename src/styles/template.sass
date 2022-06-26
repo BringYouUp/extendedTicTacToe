@@ -9,7 +9,13 @@ $cell-gap: 0.3rem
 $cell-size: calc(85vmin / #{$board-size} - #{$cell-gap})
 $cell-border-radius: calc(#{$cell-size} / 5)
 
+@mixin ticCell
+	background-image: url('./../../img/tic.png')
+	background-color: $tic-color
 
+@mixin tacCell
+	background-image: url('./../../img/tac.png')
+	background-color: $tac-color
 
 @mixin unOccupiedCell
 	box-shadow: 0.1rem 0.1rem 0.2rem #bebebe, -0.1rem -0.1rem 0.2rem #ffffff
@@ -18,9 +24,6 @@ $cell-border-radius: calc(#{$cell-size} / 5)
 	box-shadow: inset 0.1rem 0.1rem 0.2rem #bebebe, inset -0.1rem -0.1rem 0.2rem #ffffff !important
 
 @mixin headerElement
-	background-position: center
-	background-repeat: no-repeat
-	background-size: 90%
 	border-radius: .5rem
 	width: $cell-size
 	height: $cell-size

@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import useHistory from './hooks/useHistory'
-import useCurrentBoard from './hooks/useCurrentBoard'
-import useWinner from './hooks/useWinner'
-import useBot from './hooks/useBot'
+import { useBot, useCurrentBoard, useHistory, useWinner } from './hooks/index.js'
 
-import Header from './components/Header/Header'
-import GameBoard from './components/GameBoard/GameBoard'
+import { Header, GameBoard } from './components/index.js'
 
 import { START_GAME, SIZE_OF_BOARD } from './consts'
-import moveHandler from './helpers/moveHandler.js'
+
+import { moveHandler } from './services/index.js'
 
 import styles from './App.module.sass'
 
@@ -21,6 +18,7 @@ const App = () => {
 	const { moveOfBot, isGameWithBot, updateActivityOfBot, isBotMovesFirst, updateIsBotMovesFirst, setPause } = useBot(history, gameID)
 
 	useEffect(() => moveHandler(moveOfBot, currentBoard, winner, updateHistory), [moveOfBot])
+	
 	useEffect(() => winner ? setPause(true) : null, [winner])
 
 	return (

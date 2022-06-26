@@ -11,16 +11,16 @@
 	&:active
 		@include occupiedCell
 
+.tic, .tac
+	animation-name: displayingMove
+	animation-duration: .33s
+
 .tic
-	background-image: url('./../../img/tic.png')
-	background-color: $tic-color
-	animation-name: displayingMove
-	animation-duration: .33s
+	@include ticCell
+
 .tac
-	background-image: url('./../../img/tac.png')
-	background-color: $tac-color
-	animation-name: displayingMove
-	animation-duration: .33s
+	@include tacCell
+
 .ticWinner
 	background-color: $tic-winner-color
 .tacWinner

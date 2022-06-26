@@ -1,11 +1,11 @@
 import React from "react";
-import Cell from "./../Cell/Cell"
+import { Cell } from "./../index.js"
 
-import moveHandler from './../../helpers/moveHandler.js'
+import { moveHandler } from './../../services/index.js'
 
 import styles from './GameBoard.module.sass'
 
-const GameBoard =({currentBoard, updateHistory, winner, winnerStreak}) => {
+const GameBoard = ({currentBoard, updateHistory, winner, winnerStreak}) => {
 	return (
 		<div className={styles.gameBoard}>
 			{

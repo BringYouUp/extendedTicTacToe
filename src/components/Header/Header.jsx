@@ -2,9 +2,7 @@ import React, {useState, useEffect} from "react";
 
 import { START_GAME, IMG_NEW_GAME, IMG_BOT, IMG_BOT_ACTIVE, IMG_BOT_FIRST, IMG_BOT_NOT_FIRST, IMG_HELP, IMG_HISTORY } from './../../consts.js'
 
-import GameMessage from './../GameMessage/GameMessage'
-import History from './../History/History'
-import Help from './../Help/Help'
+import { GameMessage, History, Help } from './../index.js'
 
 import styles from './Header.module.sass'
 
@@ -13,14 +11,23 @@ export default function Header ({winner, currentBoard, currentPlayer, isGameWith
 	const [isShowHelp, updateDisplayingHelp] = useState(false)
 
 	const startNewGame = () => {
-		console.log('obj')
 		updateHistory(START_GAME)
 		setGameID(Date.now())
 		setPause(false)
 	}
 
-	const showHistory = () => updateDisplayingHistory(prev => !prev)
-	const showHelp = desiredState => updateDisplayingHelp(prev => desiredState ?? !prev)
+	const showHistory = () => {
+		if (isShowHelp)
+			updateDisplayingHelp(prev => !prev)
+
+		updateDisplayingHistory(prev => !prev)
+	}
+	const showHelp = desiredState => {
+		if (isShowHistory)
+			updateDisplayingHistory(prev => !prev)
+
+		updateDisplayingHelp(prev => desiredState ?? !prev)
+	}
 
 	return (
 		<div className={styles.header}>
@@ -29,8 +36,8 @@ export default function Header ({winner, currentBoard, currentPlayer, isGameWith
 				currentBoard={currentBoard}
 				currentPlayer={currentPlayer}
 			/>
-			<div className={styles.gameButtons}>
 
+			<div className={styles.gameButtons}>
 				<div
 					className={styles.headerElement}
 					title="start a new game"
@@ -88,7 +95,6 @@ export default function Header ({winner, currentBoard, currentPlayer, isGameWith
 				}
 
 			</div>
-
 		</div>)
 }
 

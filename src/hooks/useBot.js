@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import useCurrentBoard from './useCurrentBoard'
+import { useCurrentBoard } from './index.js'
 
-import getNextMoveOfBot from './../helpers/botMovesGenerator'
+import { getNextMoveOfBot } from './../services/index.js'
 
 import { SIZE_OF_BOARD } from './../consts'
 
-const useBot = (currentHistory, gameID) => {
+export default function useBot (currentHistory, gameID) {
 	const [ isGameWithBot, setActivityOfBot ] = useState(true)
 	const [ isPause, setPause ] = useState(false)
 
@@ -39,5 +39,3 @@ const useBot = (currentHistory, gameID) => {
 
 	return { moveOfBot, isGameWithBot, isBotMovesFirst, updateActivityOfBot, updateIsBotMovesFirst, setPause }
 }
-
-export default useBot

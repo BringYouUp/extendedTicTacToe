@@ -1,0 +1,56 @@
+/*!********************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/assets/styles/root.sass ***!
+  \********************************************************************************************************************************************************************************************/
+*, *:before, *:after {
+  margin: 0;
+}
+
+* {
+  font-family: "Fredoka One", cursive;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  padding: 0.5em;
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+::-webkit-scrollbar {
+  cursor: pointer;
+  width: 8px;
+  height: 8px;
+  border-radius: 3px 0px 0px 3px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+/*!************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/App.module.sass ***!
+  \************************************************************************************************************************************************************************************/
+
