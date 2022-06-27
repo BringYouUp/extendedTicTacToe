@@ -10,8 +10,8 @@ const Cell = ({value, moveHandler, winner, winnerStreak, position}) => {
 
 		if (!value) return finalStylesForCell(stylesForCurrectCell)
 
-		if (value === 'X') stylesForCurrectCell.push(styles.tic)
-		if (value === 'O') stylesForCurrectCell.push(styles.tac)
+		value === 'X' && stylesForCurrectCell.push(styles.tic)
+		value === 'O' && stylesForCurrectCell.push(styles.tac)
 
 		stylesForCurrectCell.push(styles.occupied)
 
@@ -19,8 +19,8 @@ const Cell = ({value, moveHandler, winner, winnerStreak, position}) => {
 
 		if (!winnerStreak.includes(position)) return finalStylesForCell(stylesForCurrectCell)	
 
-		if (value === 'X') stylesForCurrectCell.push(styles.ticWinner)
-		if (value === 'O') stylesForCurrectCell.push(styles.tacWinner)
+		value === 'O' && stylesForCurrectCell.push(styles.tacWinner)
+		value === 'X' && stylesForCurrectCell.push(styles.ticWinner)
 		
 		return finalStylesForCell(stylesForCurrectCell)
 	}

@@ -16,9 +16,12 @@ function getNextMoveOfBot(currentBoard) {
 	let maxWeightOfEnemyPlayer = getMaxWeightOfPlayer(arrayOfWeighEnemyPlayerMoves)
 	let maxWeightOfBotPlayer = getMaxWeightOfPlayer(arrayOfWeighBotMoves)
 
+	console.log('maxWeightOfEnemyPlayer', maxWeightOfEnemyPlayer)
+	console.log('maxWeightOfBotPlayer', maxWeightOfBotPlayer)
+
 	if (maxWeightOfBotPlayer === 0) return toGenerateRandomBotMove(currentBoard)
 
-	if (maxWeightOfEnemyPlayer < WIN_STREAK - 1.5) return toGenerateAttackNextMove(arrayOfWeighBotMoves)
+	if (maxWeightOfEnemyPlayer <= WIN_STREAK - 1) return toGenerateAttackNextMove(arrayOfWeighBotMoves)
 
 	if (Math.trunc(maxWeightOfEnemyPlayer) <= Math.trunc(maxWeightOfBotPlayer)) return toGenerateAttackNextMove(arrayOfWeighBotMoves)
 
@@ -263,7 +266,7 @@ function getWeightForEveryEmptyCell(currentBoard, enemyPlayer, botPlayer) {
 
 			let currentCell = currentBoard.board[index - i]
 
-			if (i !== 1 && currentCell === null) return i - 1 + 0.5
+			if (i !== 1 && currentCell === null) return i - 1 + 0.1
 			if (currentCell !== enemyPlayer) return i - 1
 		}
 	}
@@ -274,7 +277,7 @@ function getWeightForEveryEmptyCell(currentBoard, enemyPlayer, botPlayer) {
 
 			let currentCell = currentBoard.board[index + i]
 
-			if (i !== 1 && currentCell === null) return i - 1 + 0.5
+			if (i !== 1 && currentCell === null) return i - 1 + 0.1
 			if (currentCell !== enemyPlayer) return i - 1
 		}
 	}
@@ -285,7 +288,7 @@ function getWeightForEveryEmptyCell(currentBoard, enemyPlayer, botPlayer) {
 
 			let currentCell = currentBoard.board[index - i * SIZE_OF_BOARD]
 
-			if (i !== 1 && currentCell === null) return i - 1 + 0.5
+			if (i !== 1 && currentCell === null) return i - 1 + 0.1
 			if (currentCell !== enemyPlayer) return i - 1
 		}
 	}
@@ -296,7 +299,7 @@ function getWeightForEveryEmptyCell(currentBoard, enemyPlayer, botPlayer) {
 
 			let currentCell = currentBoard.board[index + i * SIZE_OF_BOARD]
 
-			if (i !== 1 && currentCell === null) return i - 1 + 0.5
+			if (i !== 1 && currentCell === null) return i - 1 + 0.1
 			if (currentCell !== enemyPlayer) return i - 1
 		}
 	}
@@ -308,7 +311,7 @@ function getWeightForEveryEmptyCell(currentBoard, enemyPlayer, botPlayer) {
 
 			let currentCell = currentBoard.board[index - i * SIZE_OF_BOARD - i]
 
-			if (i !== 1 && currentCell === null) return i - 1 + 0.5
+			if (i !== 1 && currentCell === null) return i - 1 + 0.1
 			if (currentCell !== enemyPlayer) return i - 1
 		}
 	}
@@ -320,7 +323,7 @@ function getWeightForEveryEmptyCell(currentBoard, enemyPlayer, botPlayer) {
 
 			let currentCell = currentBoard.board[index + i * SIZE_OF_BOARD + i]
 
-			if (i !== 1 && currentCell === null) return i - 1 + 0.5
+			if (i !== 1 && currentCell === null) return i - 1 + 0.1
 			if (currentCell !== enemyPlayer) return i - 1
 		}
 	}
@@ -332,7 +335,7 @@ function getWeightForEveryEmptyCell(currentBoard, enemyPlayer, botPlayer) {
 
 			let currentCell = currentBoard.board[index - i * SIZE_OF_BOARD + i]
 
-			if (i !== 1 && currentCell === null) return i - 1 + 0.5
+			if (i !== 1 && currentCell === null) return i - 1 + 0.1
 			if (currentCell !== enemyPlayer) return i - 1
 		}
 	}
@@ -344,7 +347,7 @@ function getWeightForEveryEmptyCell(currentBoard, enemyPlayer, botPlayer) {
 
 			let currentCell = currentBoard.board[index + i * SIZE_OF_BOARD - i]
 
-			if (i !== 1 && currentCell === null) return i - 1 + 0.5
+			if (i !== 1 && currentCell === null) return i - 1 + 0.1
 			if (currentCell !== enemyPlayer) return i - 1
 		}
 	}

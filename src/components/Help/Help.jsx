@@ -6,9 +6,7 @@ import { IMG_NEW_GAME, IMG_BOT, IMG_BOT_ACTIVE, IMG_BOT_FIRST, IMG_BOT_NOT_FIRST
 
 const Help = ({showHelp, isShowHelp}) => {
 
-	function keyHandler (event) {
-		if (event.key === 'Escape') showHelp(false)
-	}
+	const keyHandler = event => event.key === 'Escape' && showHelp(false)	
 
 	useEffect(() => {
 		window.addEventListener('keyup', keyHandler)
@@ -24,7 +22,6 @@ const Help = ({showHelp, isShowHelp}) => {
 				<h2>the goal is 5 in a row</h2>
 				
 				<ul>
-
 					<li>
 						<img className={styles.helpElement} src={IMG_NEW_GAME} alt="" />
 						<span>start new game</span>

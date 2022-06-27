@@ -1,12 +1,19 @@
 https://extended-tic-tac-toe.web.app/
 
+--- VER. 0.8.2 ---
+
+	** FIXED
+		- some fixed bot logic
+	** COMMON
+		- via Escape key user can close history and help station
+
 --- VER. 0.8.1 ---
 
 	** FIXED
 		- removed simultaneous displaying history and helpStation
 		- structure of project was thought
 	** COMMON
-		- added game goal
+		- added game goal in help station
 	** STYLES
 		- some changes
 		- changed distance between header buttons

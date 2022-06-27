@@ -6,7 +6,7 @@ import { GameMessage, History, Help } from './../index.js'
 
 import styles from './Header.module.sass'
 
-export default function Header ({winner, currentBoard, currentPlayer, isGameWithBot , isBotMovesFirst, history, updateActivityOfBot, updateIsBotMovesFirst, updateCurrentBoard, updateHistory, setGameID, setPause}) {
+const Header = ({winner, currentBoard, currentPlayer, isGameWithBot , isBotMovesFirst, history, updateActivityOfBot, updateIsBotMovesFirst, updateCurrentBoard, updateHistory, setGameID, setPause}) => {
 	const [isShowHistory, updateDisplayingHistory] = useState(false)
 	const [isShowHelp, updateDisplayingHelp] = useState(false)
 
@@ -17,15 +17,11 @@ export default function Header ({winner, currentBoard, currentPlayer, isGameWith
 	}
 
 	const showHistory = () => {
-		if (isShowHelp)
-			updateDisplayingHelp(prev => !prev)
-
+		isShowHelp && updateDisplayingHelp(prev => !prev)
 		updateDisplayingHistory(prev => !prev)
 	}
 	const showHelp = desiredState => {
-		if (isShowHistory)
-			updateDisplayingHistory(prev => !prev)
-
+		isShowHistory && updateDisplayingHistory(prev => !prev)
 		updateDisplayingHelp(prev => desiredState ?? !prev)
 	}
 
@@ -77,9 +73,10 @@ export default function Header ({winner, currentBoard, currentPlayer, isGameWith
 					isShowHistory
 					? 
 						<History
+							showHistory={showHistory}
+							isShowHistory={isShowHistory}
 							history={history}
 							updateCurrentBoard={updateCurrentBoard}
-							isShowHistory={isShowHistory}
 						/>
 					: null
 				}
@@ -98,4 +95,5 @@ export default function Header ({winner, currentBoard, currentPlayer, isGameWith
 		</div>)
 }
 
+export default Header
 

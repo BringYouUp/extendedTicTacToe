@@ -6,7 +6,7 @@ import { getNextMoveOfBot } from './../services/index.js'
 
 import { SIZE_OF_BOARD } from './../consts'
 
-export default function useBot (currentHistory, gameID) {
+const useBot = (currentHistory, gameID) => {
 	const [ isGameWithBot, setActivityOfBot ] = useState(true)
 	const [ isPause, setPause ] = useState(false)
 
@@ -29,7 +29,7 @@ export default function useBot (currentHistory, gameID) {
 	
 	const updateIsBotMovesFirst = () => setIsBotMovesFirst(prev => !prev)
 
-	const startingGame = () => isGameWithBot ? setIsBotMoveNext(isBotMovesFirst) : null
+	const startingGame = () => isGameWithBot && setIsBotMoveNext(isBotMovesFirst)
 
 	useEffect (() => currentHistory.length === 1 ? startingGame() : makeMove(), [currentBoard, gameID])
 
@@ -39,3 +39,5 @@ export default function useBot (currentHistory, gameID) {
 
 	return { moveOfBot, isGameWithBot, isBotMovesFirst, updateActivityOfBot, updateIsBotMovesFirst, setPause }
 }
+
+export default useBot

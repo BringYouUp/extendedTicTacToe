@@ -1,4 +1,4 @@
-export default function moveHandler (anotherMove, currentBoard, winner, updateHistory) {
+const moveHandler = (anotherMove, currentBoard, winner, updateHistory) => {
 	if (!Number.isInteger(anotherMove) || currentBoard.board[anotherMove] || winner) return
 
 	let newIsXNext = !currentBoard.isXNext
@@ -8,3 +8,4 @@ export default function moveHandler (anotherMove, currentBoard, winner, updateHi
 	updateHistory(prev => [...prev, {board: newBoard, isXNext: newIsXNext}])
 }
 
+export default moveHandler

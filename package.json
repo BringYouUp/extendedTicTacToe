@@ -1,6 +1,6 @@
 {
   "name": "extended_tic_tac_toe",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "another application",
   "license": "MIT",
   "scripts": {
