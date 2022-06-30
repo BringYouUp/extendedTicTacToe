@@ -1,5 +1,10 @@
 https://extended-tic-tac-toe.web.app/
 
+--- VER. 0.8.3 ---
+
+	** FIXED
+		- some fixed bot logic, again
+
 --- VER. 0.8.2 ---
 
 	** FIXED

@@ -16,12 +16,9 @@ function getNextMoveOfBot(currentBoard) {
 	let maxWeightOfEnemyPlayer = getMaxWeightOfPlayer(arrayOfWeighEnemyPlayerMoves)
 	let maxWeightOfBotPlayer = getMaxWeightOfPlayer(arrayOfWeighBotMoves)
 
-	console.log('maxWeightOfEnemyPlayer', maxWeightOfEnemyPlayer)
-	console.log('maxWeightOfBotPlayer', maxWeightOfBotPlayer)
-
 	if (maxWeightOfBotPlayer === 0) return toGenerateRandomBotMove(currentBoard)
 
-	if (maxWeightOfEnemyPlayer <= WIN_STREAK - 1) return toGenerateAttackNextMove(arrayOfWeighBotMoves)
+	if (maxWeightOfEnemyPlayer <= WIN_STREAK - 2) return toGenerateAttackNextMove(arrayOfWeighBotMoves)
 
 	if (Math.trunc(maxWeightOfEnemyPlayer) <= Math.trunc(maxWeightOfBotPlayer)) return toGenerateAttackNextMove(arrayOfWeighBotMoves)
 

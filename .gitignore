@@ -7,3 +7,4 @@ node_modules
 .firebase
 .firebaserc
 .test_cache
+psd
