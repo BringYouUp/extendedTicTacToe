@@ -29,8 +29,7 @@ module.exports = {
 		open: true,
 		client: {
 	      overlay: true,
-	      progress: true,
-	    },
+	   },
 	},
 	module: {
 		rules: [{
@@ -103,6 +102,13 @@ module.exports = {
 	],
 	resolve: {
 		extensions: ['', '.js', '.jsx'],
+		alias: {
+			'@': path.resolve(__dirname, './src'),
+			'@components': path.resolve(__dirname, './src/components'),
+			'@styles': path.resolve(__dirname, './src/styles'),
+			'@services': path.resolve(__dirname, './src/services'),
+			'@hooks': path.resolve(__dirname, './src/hooks'),
+		}
 	},
 	stats: {
 		children: true,

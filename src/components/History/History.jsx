@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"
 
-import styles from './History.module.sass'
+import styles from "./History.module.sass"
 
-import { IMG_HISTORY } from './../../consts.js'
+import { IMG_HISTORY } from "@/consts.js"
 
 const History = ({showHistory, isShowHistory, history, updateCurrentBoard }) => {
-
-	const keyHandler = event => event.key === 'Escape' && showHistory(false)
+	const keyHandler = event => event.key === "Escape" && showHistory(false)
 
 	useEffect(() => {
-		window.addEventListener('keyup', keyHandler)
-		return () => window.removeEventListener('keyup', keyHandler)
+		window.addEventListener("keyup", keyHandler)
+		return () => window.removeEventListener("keyup", keyHandler)
 	}, [])
 
 	return (
 		<div
-			style={{"display" : isShowHistory ? "block" : "none"}}
+			style={{'display' : isShowHistory ? 'block' : 'none'}}
 			onMouseLeave={() => updateCurrentBoard(history.length - 1)}
 			className={styles.history}>
 			<ul>
@@ -25,7 +24,7 @@ const History = ({showHistory, isShowHistory, history, updateCurrentBoard }) => 
 							{
 								index !== 0
 									? `Go to move #${index}`
-									: 'Start game'
+									: "Start game"
 							}
 						</li>
 					))

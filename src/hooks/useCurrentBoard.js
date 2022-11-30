@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { START_GAME } from './../consts'
+import { START_GAME } from '@/consts'
 
 const useHistory = currentHistory => {
 	const [currentBoard, setCurrentBoard] = useState(currentHistory[currentHistory.length - 1])

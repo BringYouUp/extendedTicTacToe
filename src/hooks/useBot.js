@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { useCurrentBoard } from './index.js'
 
-import { getNextMoveOfBot } from './../services/index.js'
-
-import { SIZE_OF_BOARD } from './../consts'
+import { getNextMoveOfBot } from '@services/index.js'
 
 const useBot = (currentHistory, gameID) => {
 	const [ isGameWithBot, setActivityOfBot ] = useState(true)

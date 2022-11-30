@@ -10,11 +10,11 @@ $cell-size: calc(85vmin / #{$board-size} - #{$cell-gap})
 $cell-border-radius: calc(#{$cell-size} / 5)
 
 @mixin ticCell
-	background-image: url('./../../img/tic.png')
+	background-image: url('@/img/tic.png')
 	background-color: $tic-color
 
 @mixin tacCell
-	background-image: url('./../../img/tac.png')
+	background-image: url('@/img/tac.png')
 	background-color: $tac-color
 
 @mixin unOccupiedCell

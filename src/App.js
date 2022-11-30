@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import { useBot, useCurrentBoard, useHistory, useWinner } from './hooks/index.js'
+import { useBot, useCurrentBoard, useHistory, useWinner } from '@hooks/index.js'
 
-import { Header, GameBoard } from './components/index.js'
+import { Header, GameBoard } from '@/components/index.js'
 
-import { START_GAME, SIZE_OF_BOARD } from './consts'
-
-import { moveHandler } from './services/index.js'
+import { moveHandler } from '@services/index.js'
 
 import styles from './App.module.sass'
 

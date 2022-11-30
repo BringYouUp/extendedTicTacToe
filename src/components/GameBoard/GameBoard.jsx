@@ -1,9 +1,10 @@
-import React from "react";
-import { Cell } from "./../index.js"
+import React from "react"
 
-import { moveHandler } from './../../services/index.js'
+import { Cell } from "@/components/index.js"
 
-import styles from './GameBoard.module.sass'
+import { moveHandler } from "@services/index.js"
+
+import styles from "./GameBoard.module.sass"
 
 const GameBoard = ({currentBoard, updateHistory, winner, winnerStreak}) => {
 	return (

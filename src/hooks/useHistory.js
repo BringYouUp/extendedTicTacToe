@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { START_GAME } from './../consts'
+import { START_GAME } from '@/consts'
 
 const useHistory = key => {
 	const [history, setHistory] = useState(START_GAME)

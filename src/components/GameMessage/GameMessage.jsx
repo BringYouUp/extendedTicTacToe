@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 
-import styles from './GameMessage.module.sass'
+import styles from "./GameMessage.module.sass"
 
 const GameMessage = ({currentBoard, currentPlayer, winner}) => {
 	const isMovesLeft = currentBoard.some(item => item == null)
@@ -16,7 +16,7 @@ const GameMessage = ({currentBoard, currentPlayer, winner}) => {
 	}
 
 	const getMessageForCurrentPlayer = () => {
-		if (!(!winner && isMovesLeft)) return
+		if (winner || !isMovesLeft) return
 
 		return (
 			<>
@@ -28,12 +28,10 @@ const GameMessage = ({currentBoard, currentPlayer, winner}) => {
 	const getMessageForDraw = () => {
 		if (isMovesLeft) return
 
-		return (
-			<span style={{color: 'grey'}}> DRAW </span>
-		)
+		return <span style={{color: 'grey'}}> DRAW </span>
 	}
 
-	currentPlayer = currentPlayer ? 'X' : 'O'
+	currentPlayer = currentPlayer ? "X" : "O"
 
 	return (
 		<div className={styles.gameMessage}>

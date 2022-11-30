@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from "react"
 
-import styles from './Help.module.sass'
+import styles from "./Help.module.sass"
 
-import { IMG_NEW_GAME, IMG_BOT, IMG_BOT_ACTIVE, IMG_BOT_FIRST, IMG_BOT_NOT_FIRST, IMG_HELP, IMG_HISTORY, IMG_TIC, IMG_TAC } from './../../consts.js'
+import { IMG_NEW_GAME, IMG_BOT, IMG_BOT_ACTIVE, IMG_BOT_FIRST, IMG_BOT_NOT_FIRST, IMG_HELP, IMG_HISTORY, IMG_TIC, IMG_TAC } from "@/consts.js"
 
 const Help = ({showHelp, isShowHelp}) => {
 
-	const keyHandler = event => event.key === 'Escape' && showHelp(false)	
+	const keyHandler = event => event.key === "Escape" && showHelp(false)	
 
 	useEffect(() => {
-		window.addEventListener('keyup', keyHandler)
-		return () => window.removeEventListener('keyup', keyHandler)
+		window.addEventListener("keyup", keyHandler)
+		return () => window.removeEventListener("keyup", keyHandler)
 	}, [])
 
 	return (

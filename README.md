@@ -1,18 +1,25 @@
-https://extended-tic-tac-toe.web.app/
+<h1 align="center">Hi there</h1>	
+<h2 align="center">Below are the changes per application  version</h2>
+<h3 target="_blank" align="center"><a href="https://extended-tic-tac-toe.web.app/">ExtendedTicTacToe</a></h3>
 
---- VER. 0.8.3 ---
+**VER. 0.8.31**
+
+	** FIXED
+		- some fixes
+
+**VER. 0.8.3**
 
 	** FIXED
 		- some fixed bot logic, again
 
---- VER. 0.8.2 ---
+**VER. 0.8.2**
 
 	** FIXED
 		- some fixed bot logic
 	** COMMON
 		- via Escape key user can close history and help station
 
---- VER. 0.8.1 ---
+**VER. 0.8.1**
 
 	** FIXED
 		- removed simultaneous displaying history and helpStation
@@ -23,7 +30,7 @@ https://extended-tic-tac-toe.web.app/
 		- some changes
 		- changed distance between header buttons
 
---- VER. 0.8.0 ---
+**VER. 0.8.0**
 	
 	** COMMON
 		- some code refactoring
@@ -32,7 +39,7 @@ https://extended-tic-tac-toe.web.app/
 		- added help station
 		- added favicon
 
---- VER. 0.7.5 ---
+**VER. 0.7.5**
 
 	** FIXED
 		- added priority. The bot is smarter and more dangerous )))
@@ -40,7 +47,7 @@ https://extended-tic-tac-toe.web.app/
 	** COMMON
 		- winstreak can be a random number : whether it is 5 or 7
 
---- VER. 0.6.0 ---
+**VER. 0.6.0**
 
 	** FIXED
 		- first move of bot is not near game area borders
@@ -49,7 +56,7 @@ https://extended-tic-tac-toe.web.app/
 		- added style of active history
 		- added new move style effect
 
---- VER. 0.5.0 ---
+**VER. 0.5.0**
 
 	** COMMON
 		- the structure of project has been changed

@@ -2,11 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 
-import './styles/root.sass'
-
-// const React = require("react");
-// const ReactDOM = require("react-dom");
-// const App = require("./App.jsx");
+import '@/styles/root.sass'
 
 ReactDOM.render(<App />, document.getElementById("root"));
 

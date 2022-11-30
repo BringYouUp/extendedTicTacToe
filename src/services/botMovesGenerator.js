@@ -1,4 +1,4 @@
-import { SIZE_OF_BOARD, WIN_STREAK, HALF_OF_WIN_STREAK } from './../consts.js'
+import { SIZE_OF_BOARD, WIN_STREAK, HALF_OF_WIN_STREAK } from '@/consts.js'
 
 const toGenerateAttackNextMove = arrayOfWeighMoves => toCalculateNextLogicMove(arrayOfWeighMoves)
 
