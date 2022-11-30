@@ -2,11 +2,14 @@
 <h2 align="center">Below are the changes per application  version</h2>
 <h3 target="_blank" align="center"><a href="https://extended-tic-tac-toe.web.app/">ExtendedTicTacToe</a></h3>
 
+<<<<<<< HEAD
 **VER. 0.8.31**
 
 	** FIXED
 		- some fixes
 
+=======
+>>>>>>> 2aeac6c77b353e3db9dee684622a5066565a7869
 **VER. 0.8.3**
 
 	** FIXED
@@ -28,7 +31,7 @@
 		- added game goal in help station
 	** STYLES
 		- some changes
-		- changed distance between header buttons
+		- changed distance between  header buttons
 
 **VER. 0.8.0**
 	
