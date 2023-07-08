@@ -1,3 +1,5 @@
+cache
+build
 dist
 edits-of-tic-tac-toe.txt
 firebase.json
@@ -8,4 +10,3 @@ node_modules
 .firebaserc
 .test_cache
 psd
-localhost%3A8081

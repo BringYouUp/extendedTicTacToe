@@ -1,0 +1,10 @@
+@import '@styles/mixins'
+
+.gameBoard
+	width: 100%
+	height: calc(100vh - var(--cellSize))
+	display: grid
+	grid-template: repeat(var(--boardSize), var(--cellSize)) / repeat(var(--boardSize), var(--cellSize))
+	grid-gap: var(--cellGap)
+	justify-content: center
+	align-content: center

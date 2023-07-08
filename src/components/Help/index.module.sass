@@ -1,0 +1,50 @@
+@import '@styles/mixins'
+
+.help
+	position: fixed
+	z-index: 2
+	bottom: 0
+	right: 0
+	display: flex
+	width: calc( 100% - 2 * .5rem)
+	height: calc( 100% - 2 * .5rem - var(--cellSize))
+	justify-content: center
+	align-items: center
+	margin: .5rem
+
+.helpStation
+	display: flex
+	flex-direction: column
+	justify-content: center
+	border-radius: var(--cellBorderRadius)
+	min-width: 85vmin
+	min-height: 85vmin
+	max-width: 85vmin
+	max-height: 85vmin
+	background-color: var(--backgroundColor)
+	@include occupiedCell
+	h2
+		display: inline-block
+		text-align: center
+		margin-bottom: calc(var(--cellGap) + var(--cellSize))
+	ul
+		width: 100%
+	li
+		display: flex
+		justify-content: space-between
+		height: var(--cellSize)
+		margin: 0 var(--cellSize)
+	li:not(:last-child)
+		margin-bottom: calc(var(--cellGap) + var(--cellSize))
+
+	span
+		display: inline-block
+		font-size: calc(var(--cellSize) / 2)
+		padding: calc(var(--cellSize) / 4) 0
+		text-transform: uppercase
+		border-bottom: 1px solid grey
+
+.helpElement
+	@include headerElement
+	display: inline-block
+	@include unOccupiedCell

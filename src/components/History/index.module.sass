@@ -1,0 +1,27 @@
+@import '@styles/mixins'
+
+.history
+	z-index: 2
+	width: max-content
+	position: absolute
+	height: auto
+	text-align: right
+	right: 0px
+	top: calc(var(--cellSize) + 0.5rem)
+	max-height: calc(100vh - var(--cellSize) - 1.5rem)
+	overflow-y: auto
+	background-color: var(--backgroundColor)
+	opacity: .66
+	border-radius: var(--cellBorderRadius)
+	@include unOccupiedCell
+	li
+		display: block
+		height: var(--cellSize)
+		padding: calc(var(--cellSize) / 4)
+		opacity: .5
+		font-size: calc(var(--cellSize) / 2)
+		text-transform: uppercase
+	li:hover
+		background-color: #f0f0f0
+		font-weight: bold
+		opacity: 1	

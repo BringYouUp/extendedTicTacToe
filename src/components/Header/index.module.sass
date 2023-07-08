@@ -1,0 +1,29 @@
+@import '@styles/mixins'
+
+.header
+	position: relative
+	display: flex
+	justify-content: center
+	height: var(--cellSize)
+	text-transform: uppercase
+.gameButtons
+	position: absolute
+	top: 0
+	right: 0
+	display: flex
+	& > div + div
+		margin-left: calc(var(--cellGap) * 2)
+	& img
+		width: var(--cellSize)
+
+.headerElement
+	@include headerElement
+	@include unOccupiedCell
+	&:active
+		@include occupiedCell
+
+.occupied
+	@include occupiedCell
+
+.unOccupied
+	@include unOccupiedCell

@@ -1,6 +1,6 @@
-import useBot from './useBot.js'
-import useCurrentBoard from './useCurrentBoard.js'
-import useHistory from './useHistory.js'
-import useWinner from './useWinner.js'
+import useBot from "./useBot"
+import useCurrentBoard from "./useCurrentBoard"
+import useHistory from "./useHistory"
+import useWinner from "./useWinner"
 
 export { useBot, useCurrentBoard, useHistory, useWinner }

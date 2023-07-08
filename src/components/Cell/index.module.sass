@@ -1,0 +1,36 @@
+@import '@styles/mixins'
+
+.cell
+	cursor: pointer
+	background-position: center
+	background-repeat: no-repeat
+	background-size: contain
+	padding: 5px
+	border-radius: var(--cellBorderRadius)
+	@include unOccupiedCell
+	&:active
+		@include occupiedCell
+
+.tic, .tac
+	animation-name: displayingMove
+	animation-duration: .33s
+
+.tic
+	@include ticCell
+
+.tac
+	@include tacCell
+
+.ticWinner
+	background-color: var(--ticWinnerHoverlayColor)
+.tacWinner
+	background-color: var(--tacWinnerHoverlayColor)
+
+.occupied
+	@include occupiedCell
+
+@keyframes displayingMove
+	0%
+		filter: brightness(.75)
+	100%
+		filter: brightness(1)

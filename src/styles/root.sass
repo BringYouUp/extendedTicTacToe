@@ -1,4 +1,5 @@
-@import 'template'
+@import './variables.css'
+@import 'mixins'
 
 *, *:before, *:after
 	margin: 0
@@ -9,10 +10,17 @@
 	user-select: none
 	-webkit-tap-highlight-color: transparent
 
+@font-face
+	font-family: Fredoka One
+	src: url(../assets/fonts/fredoka-bold.ttf)
+	font-style: normal
+	font-weight: normal
+
 body
+	font-family: Fredoka One, sans-serif
 	font-size: calc(1vw + .6em)
 	overflow: hidden
-	background-color: $background-color
+	background-color: var(--backgroundColor)
 	width: 100vw
 	height: 100vh
 

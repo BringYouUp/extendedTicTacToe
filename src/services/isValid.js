@@ -1,4 +1,4 @@
-import {SIZE_OF_BOARD, WIN_STREAK} from '@/consts.js'
+import {SIZE_OF_BOARD, WIN_STREAK} from '@/consts'
 
 const isValidToRight = startPoint => ![0, 1, 2, 3].includes((startPoint + WIN_STREAK - 1) % SIZE_OF_BOARD)
 

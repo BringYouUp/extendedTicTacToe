@@ -1,0 +1,15 @@
+:root {
+	--backgroundColor: hsl(0, 0%, 87%);
+	--ticColor: red;
+	--tacColor: blue;
+	--ticHoverlayColor: hsl(0, 24%, 87%);
+	--tacHoverlayColor: hsl(196, 25%, 82%);
+	--ticWinnerColor: var(--ticColor);
+	--tacWinnerColor: var(--tacColor);
+	--ticWinnerHoverlayColor: hsl(0, 100%, 85%);
+	--tacWinnerHoverlayColor: hsl(212, 100%, 78%);
+	--boardSize: 15;
+	--cellGap: 0.3rem;
+	--cellSize: calc(85vmin / var(--boardSize) - var(--cellGap));
+	--cellBorderRadius: calc(var(--cellSize) / 5);
+}
